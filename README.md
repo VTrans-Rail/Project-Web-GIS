@@ -4,21 +4,21 @@ Project-Web-GIS
 Documentation of how the Rail Project Management web forms and dashboards work, including behind-the-scenes scripts
 
 ###Main Components:
--Project Review Dashboard 
--Project Review Map 
--Project Creation Form 
--Project Status Update Form 
+- Project Review Dashboard 
+- Project Review Map 
+- Project Creation Form 
+- Project Status Update Form 
 ===============
 ###Behind-the-scenes Scripts:
--Creation Tasks 
--New Project Append 
--Status Update Append 
--Create Relationship Script 
+- Creation Tasks 
+- New Project Append 
+- Status Update Append 
+- Create Relationship Script 
 ===============
 ###Tools Used
--Esri ArcGIS 
--Esri ArcGIS Online 
--Esri Model Builder 
+- Esri ArcGIS 
+- Esri ArcGIS Online 
+- Esri Model Builder 
 ===============
 
 #Main Components:
