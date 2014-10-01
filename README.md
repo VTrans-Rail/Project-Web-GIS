@@ -24,7 +24,7 @@ This system is designed to allow for easy and flexible project managment using w
 ###Project Review Dashboard
 This dashboard gives a high-level overview of all current projects and status updates.
 
-The main part of the dashboard contains a map showing current rail projects. Asset projects are represented by 4 symbols:
+The main part of the dashboard contains the [Project Review Map](https://github.com/VTrans-Rail/Project-Web-GIS#project-review-map) showing current rail projects. Asset projects are represented by 4 symbols:
 - Bridge: ![bridge](https://raw.githubusercontent.com/VTrans-Rail/Project-Web-GIS/master/img/bridge.png) 
 - Crossing: ![crossing](https://raw.githubusercontent.com/VTrans-Rail/Project-Web-GIS/master/img/crossing.png) 
 - Culvert: ![culvert](https://raw.githubusercontent.com/VTrans-Rail/Project-Web-GIS/master/img/culvert.png) 
@@ -41,7 +41,7 @@ Here is a screenshot of the current dashboard:
 
 
 ###Project Review Map
-_Explanation_
+This map shows 
 
 
 ###Project Creation Form
