@@ -13,8 +13,9 @@ The processing tasks are all automated, but I want to document the web setup ste
 Starting from a new map:  
 1. Add [service](http://vtransmap01.aot.state.vt.us/arcgis/rest/services/Rail/PROJ_Review/FeatureServer) to the map  
 2. Rename features:  
-  a. `~~PROJ Review - ~~Asset Projects`  
-  b. `~~PROJ Review - ~~Track Projects`  
+  a. <del>PROJ Review - </del> Asset Projects    
+  b. <del>PROJ Review - </del> Track Projects  
+
 3. Add [Rail Lines](http://vtransmap01.aot.state.vt.us/arcgis/rest/services/Rail/Rail_Lines/MapServer)
 4. Add [Rail Mile Posts](http://vtransmap01.aot.state.vt.us/arcgis/rest/services/Rail/Rail_MilePosts/MapServer)
 5. Save Map (in folder `Projects`)
