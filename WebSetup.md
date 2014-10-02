@@ -10,16 +10,16 @@ The processing tasks are all automated, but I want to document the web setup ste
 - Project Status Update Form 
 
 ###Project Review Map
-Starting from a new map:
-1. Add [service](http://vtransmap01.aot.state.vt.us/arcgis/rest/services/Rail/PROJ_Review/FeatureServer) to the map
+Starting from a new map:  
+1. Add [service](http://vtransmap01.aot.state.vt.us/arcgis/rest/services/Rail/PROJ_Review/FeatureServer) to the map  
 2. Rename features:  
-  a. `~PROJ Review - ~Asset Projects`  
-  b. `~PROJ Review - ~Track Projects`  
-3. Add [Rail Lines](http://vtransmap01.aot.state.vt.us/arcgis/rest/services/Rail/Rail_Lines/MapServer)
-4. Add [Rail Mile Posts](http://vtransmap01.aot.state.vt.us/arcgis/rest/services/Rail/Rail_MilePosts/MapServer)
-5. Save Map (in folder `Projects`)
-6. Tag `VTrans Rail`,`projects`
-7. Share with `Organization`, `Program Managers` and `Rail Editors` groups.
+    *  `~PROJ Review - ~Asset Projects`  
+    *  `~PROJ Review - ~Track Projects`  
+3. Add [Rail Lines](http://vtransmap01.aot.state.vt.us/arcgis/rest/services/Rail/Rail_Lines/MapServer)  
+4. Add [Rail Mile Posts](http://vtransmap01.aot.state.vt.us/arcgis/rest/services/Rail/Rail_MilePosts/MapServer)  
+5. Save Map (in folder `Projects`)  
+6. Tag `VTrans Rail`,`projects`  
+7. Share with `Organization`, `Program Managers` and `Rail Editors` groups.  
 8. Add Thumbnail   
 
 ![Thumbnail](https://raw.githubusercontent.com/VTrans-Rail/Project-Web-GIS/master/img/PROJ_Review.png)
