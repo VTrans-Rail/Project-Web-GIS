@@ -10,7 +10,9 @@ The processing tasks are all automated, but I want to document the web setup ste
 - Project Status Update Form 
 
 ###Project Review Map
+
 Starting from a new map:  
+
 1. Add [service](http://vtransmap01.aot.state.vt.us/arcgis/rest/services/Rail/PROJ_Review/FeatureServer) to the map  
 2. Rename features:  
   a. <del>PROJ Review - </del> Asset Projects    
@@ -26,24 +28,28 @@ Starting from a new map:
 ![Thumbnail](https://raw.githubusercontent.com/VTrans-Rail/Project-Web-GIS/master/img/PROJ_Review.png)
 
 ###Project Creation Form
+
 Starting from a new map:  
+
 1. Add [service](http://vtransmap01.aot.state.vt.us/arcgis/rest/services/Rail/PROJ_AddNew/FeatureServer) to the map  
 2. Rename feature <del>~~PROJ AddNew - </del>Add New Project  
 3. Add `AssetID` [service](http://vtransmap01.aot.state.vt.us/arcgis/rest/services/Rail/AssetID/FeatureServer/0) to the map  
+
 4. Rename <del>AssetID - </del> Asset ID Schema`  
+
 5. Add Labels for `AssetID` field   
-![Labels]()
+![Labels](https://raw.githubusercontent.com/VTrans-Rail/Project-Web-GIS/master/img/Create Labels.png)
 6. Set visibility range to `1:144,448` or similar (too many features at full zoom)
-7. Save Map (in folder `Projects`)
+7. Save Map (in folder `Projects`)  
 8. Share with `Organization`  
 9. Share as a `GeoForm application` called `Add Project Form`    
-
-**Geoform Configuration Steps:**
-
+  
+Geoform Configuration Steps:
+  
 1. Select Webmap  
 2. Select `Add New Project` Layer  
 3. Title: `Add New Project`
-4. Logo Image ~[logo](https://raw.githubusercontent.com/VTrans-Rail/Project-Web-GIS/master/img/logo-med.png)
+4. Logo Image ![logo](https://raw.githubusercontent.com/VTrans-Rail/Project-Web-GIS/master/img/logo-med.png)
 5. Add description
 
 >Use this form to add a new project to the database. Please note that certain fields are required, notably AssetID and FromMP.
