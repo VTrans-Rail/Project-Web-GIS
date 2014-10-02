@@ -9,28 +9,6 @@ The processing tasks are all automated, but I want to document the web setup ste
 - Project Creation Form 
 - Project Status Update Form 
 
-###Project Review Map
-
-Starting from a new map:  
-
-1. Add [service](http://vtransmap01.aot.state.vt.us/arcgis/rest/services/Rail/PROJ_Review/FeatureServer) to the map  
-2. Rename features:  
-  a. <del>PROJ Review - </del> Asset Projects    
-  b. <del>PROJ Review - </del> Track Projects  
-
-3. Add [Rail Lines](http://vtransmap01.aot.state.vt.us/arcgis/rest/services/Rail/Rail_Lines/MapServer)
-
-4. Add [Rail Mile Posts](http://vtransmap01.aot.state.vt.us/arcgis/rest/services/Rail/Rail_MilePosts/MapServer)
-
-5. Save Map (in folder `Projects`)
-
-6. Tag `VTrans Rail`,`projects`
-
-7. Share with `Organization`, `Program Managers` and `Rail Editors` groups.
-
-8. Add Thumbnail   
-
-![Thumbnail](https://raw.githubusercontent.com/VTrans-Rail/Project-Web-GIS/master/img/PROJ_Review.png)
 
 ###Project Creation Form
 
@@ -136,8 +114,51 @@ Geoform Configuration Steps:
 
 12. Share the map with the `Rail Editors` and `Rail Program Managers` groups.
 
+###Project Review Map
+
+Starting from a new map:  
+
+1. Add [projects](http://vtransmap01.aot.state.vt.us/arcgis/rest/services/Rail/PROJ_Review/FeatureServer) and [status geometry](http://vtransmap01.aot.state.vt.us/arcgis/rest/services/Rail/PROJ_StatusGeometry/MapServer) services to the map  
+2. Rename features:  
+  a. <del>PROJ Review - </del> Asset Projects    
+  b. <del>PROJ Review - </del> Track Projects  
+
+3. Add [Rail Lines](http://vtransmap01.aot.state.vt.us/arcgis/rest/services/Rail/Rail_Lines/MapServer)
+
+4. Add [Rail Mile Posts](http://vtransmap01.aot.state.vt.us/arcgis/rest/services/Rail/Rail_MilePosts/MapServer)
+
+5. Save Map (in folder `Projects`)
+
+6. Tag `VTrans Rail`,`projects`
+
+7. Share with `Organization`, `Program Managers` and `Rail Editors` groups.
+
+8. Add Thumbnail   
+
+![Thumbnail](https://raw.githubusercontent.com/VTrans-Rail/Project-Web-GIS/master/img/PROJ_Review.png)
+
+
 
 ###Project Review Dashboard
-_Steps_
+
+Build the Dashboard
+
+1. In Operations Dashboard, start a `Multi-Operational View`
+
+2. Choose the `Project Review` map
+
+3. Check the boxes next to the `Asset Projects`, `Track Projects`, `Project Status Points`, and `Project Status Lines`
+
+4. While `Asset Projects` and `Track Projects` are selected, check the box on the right that says `Selectable`
+
+5. In the `Capabilities` tab, check Show Pop Up, Highlight, Pan to, Select, Zoom To, and Feature Pop-ups
+
+6. Hit `OK`
+
+7. Add a List widget for the `Asset Projects` data and title it `Latest Asset Projects` and have it sort by `created_date` descending. Enable the following feature actions: `Show pop-up, Highlight, Pan to, Select, Zoom to` and set the Doule click action to `Zoom to`. Dock this on the right.
+
+8. Add a List widget for the `Track Projects` data and title it `Latest Track Projects` and have it sort by `created_date` descending. Enable the following feature actions: `Show pop-up, Highlight, Pan to, Select, Zoom to` and set the Doule click action to `Zoom to`. Dock this below the `Latest Asset Projects` list widget.
+
+9. Add a List widget for the `Track Projects` data and title it `Latest Project Status Updates` and have it sort by `created_date` descending. Enable the following feature actions: `Show pop-up, Highlight, Pan to, Select, Zoom to` and set the Doule click action to `Zoom to`. Dock this below the `Latest Asset Projects` list widget.
 
 ![Thumbnail]()
