@@ -14,43 +14,60 @@ The processing tasks are all automated, but I want to document the web setup ste
 
 Starting from a new map:  
 
-1. Add [service](http://vtransmap01.aot.state.vt.us/arcgis/rest/services/Rail/PROJ_AddNew/FeatureServer) to the map  
+1. Add project creation [service](http://vtransmap01.aot.state.vt.us/arcgis/rest/services/Rail/PROJ_AddNew/FeatureServer) to the map  
 
-2. Rename feature <del>~~PROJ AddNew - </del>Add New Project  
+2. Rename feature <del>PROJ AddNew - </del>Add New Project  
 
 3. Add `AssetID` [service](http://vtransmap01.aot.state.vt.us/arcgis/rest/services/Rail/AssetID/FeatureServer/0) to the map  
 
-4. Rename <del>AssetID - </del> Asset ID Schema`  
+4. Rename <del>AssetID - </del> Asset ID Schema  
 
-5. Add Labels for `AssetID` field  
-
-![Labels](https://raw.githubusercontent.com/VTrans-Rail/Project-Web-GIS/master/img/Create Labels.png)
-
-6. Set visibility range to `1:144,448` or similar (too many features at full zoom)
-
+5. Add Labels for `AssetID` field ![Labels](https://raw.githubusercontent.com/VTrans-Rail/Project-Web-GIS/master/img/Create Labels.png)  
+  
+6. Set visibility range to `1:144,448` or similar (too many features at full zoom)  
+  
 7. Save Map (in folder `Projects`)  
-
+  
 8. Share with `Organization`  
-
+  
 9. Share as a `GeoForm application` called `Add Project Form`    
   
-Geoform Configuration Steps:
+**Geoform Configuration Steps:**  
   
 1. Select Webmap  
 
 2. Select `Add New Project` Layer  
 
-3. Title: `Add New Project`
+3. Title: `Add New Project Form`
 
-4. Logo Image ![logo](https://raw.githubusercontent.com/VTrans-Rail/Project-Web-GIS/master/img/logo-med.png)
+4. Set logo image ![logo](https://raw.githubusercontent.com/VTrans-Rail/Project-Web-GIS/master/img/logo-med.png)
 
-5. Add description
+5. Add description:
 
->Use this form to add a new project to the database. Please note that certain fields are required, notably AssetID and FromMP.
-> More things may need to be added later.
-
+> Use this form to add a new project to the database. This is the same as adding a new row to your projects spreadsheet. Fill this out once you want the project to appear on the map. The information you provide here doesn't have to be complete right away, but please note that certain fields are required, notably Project Name, Project Type, AssetID, Rail Line, and FromMP. Later edits will be slightly difficult, so the more you can provide up front the easier you make your life.
+> 
+> After filling out all the fields, just click anywhere on the map at the bottom. It doesn't matter if it's right on top of the project or in the Sahara desert - I extract the data from the fields to locate the project and then disregard the location you click.
+> 
+> If anything needs to be added to the drop-down lists, please let Stephen know before you fill out the form.
+> 
+> Project Naming Convention: 
+> 
+> Project Town Name (Proper Case) + Project Number
+> 
+> Example:
+> 
+> Arlington STP 0114(4)
+> 
+> Barre City STP 0261(42)
+  
 6. Add `Required` as Help Text on the `ProjectName`, `ProjectType`, `RailLine`, `FromMP`, and `AssetID`  
+  
+Add the following hints: `Starting Mile Post` to `FromMP`, `Ending Mile Post` to `ToMP`,
+  
+Add `Optional` to all fields below `Project Description`
 
+Add `Do you want this included in reports and the map?`
+  
 7. Add `See Map Below` as Hint on the `AssetID` field  
 
 8. Change `ProjectDescription` section input to `Textarea`  
