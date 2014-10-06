@@ -44,7 +44,7 @@ Starting from a new map:
 
 5. Add description:
 
-> Use this form to add a new project to the database. This is the same as adding a new row to your projects spreadsheet. Fill this out once you want the project to appear on the map. The information you provide here doesn't have to be complete right away, but please note that certain fields are required, notably Project Name, Project Type, AssetID, Rail Line, and FromMP. Later edits will be slightly difficult, so the more you can provide up front the easier you make your life.
+> Use this form to add a new project to the database. This is the same as adding a new row to your projects spreadsheet. Fill this out once you want the project to appear on the map. The information you provide here doesn't have to be complete right away, but please note that certain fields are required, notably Project Name, Project Type, AssetID, Rail Line, and FromMP. Later edits will be slightly difficult ([instructions here](http://www.github.com)), so the more you can provide up front the easier you make your life.
 > 
 > After filling out all the fields, just click anywhere on the map at the bottom. It doesn't matter if it's right on top of the project or in the Sahara desert - I extract the data from the fields to locate the project and then disregard the location you click.
 > 
@@ -60,13 +60,15 @@ Starting from a new map:
 > 
 > Barre City STP 0261(42)
   
-6. Add `Required` as Help Text on the `ProjectName`, `ProjectType`, `RailLine`, `FromMP`, and `AssetID`  
+6. Configure the fields:
+  - Add `Required` as Help Text on the `ProjectName`, `ProjectType`, `RailLine`, `FromMP`, and `AssetID`  
   
-Add the following hints: `Starting Mile Post` to `FromMP`, `Ending Mile Post` to `ToMP`,
+  - Add the following hints: `Starting Mile Post` to `FromMP`, `Ending Mile Post` to `ToMP`,
   
-Add `Optional` to all fields below `Project Description`
+  - Add `Optional` to all fields below `Project Description`
 
-Add `Do you want this included in reports and the map?`
+  - Add `Do you want this included in reports and the map?`
+  - Add `See naming convention above` in the Project Name `Hint` field
   
 7. Add `See Map Below` as Hint on the `AssetID` field  
 
