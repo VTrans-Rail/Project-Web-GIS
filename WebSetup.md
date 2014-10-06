@@ -210,3 +210,29 @@ Build the Dashboard
     - Zoom to 
     - Set the Double click action to `Zoom to`. 
   - Dock this below the `Latest Asset Projects` widget
+
+9. Add a List widget for the `Project Status Points` data
+  - Title: `Latest Asset Updates` 
+  - Sort by `created_date` descending 
+  - Set the Description to `{ProjectManager} - {created_date}`
+  - Enable the following feature actions
+    - Show pop-up
+    - Highlight
+    -  Pan to
+    - Select
+    - Zoom to 
+    - Set the Double click action to `Zoom to`. 
+  - Dock this below the `Latest Asset Projects` widget
+
+10. Add a List widget for the `Project Status Points` data
+  - Title: `Latest Asset Updates` 
+  - Sort by `created_date` descending 
+  - Set the Description to `{ProjectManager} - {created_date}`
+  - Enable the following feature actions
+    - Show pop-up
+    - Highlight
+    -  Pan to
+    - Select
+    - Zoom to 
+    - Set the Double click action to `Zoom to`. 
+  - Dock this below the `Latest Asset Projects` widget
