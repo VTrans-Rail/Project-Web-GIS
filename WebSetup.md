@@ -44,17 +44,17 @@ Starting from a new map:
 
 5. Add description:
 
-> Use this form to add a new project to the database. This is the same as adding a new row to your projects spreadsheet. Fill this out once you want the project to appear on the map. The information you provide here doesn't have to be complete right away, but please note that certain fields are required, notably Project Name, Project Type, AssetID, Rail Line, and FromMP. Later edits will be slightly difficult ([instructions here](http://www.github.com)), so the more you can provide up front the easier you make your life.
+> Use this form to add a new project to the database. This is the same as adding a new row to your projects spreadsheet. Fill this out once you want the project to appear on the map. The information you provide here doesn't have to be complete right away, but please note that certain fields are required, notably **Project Name, Project Type, AssetID, Rail Line, and FromMP**. Later edits will be slightly difficult ([instructions here](http://www.github.com)), so the more you can provide up front the easier you make your life.
 > 
-> After filling out all the fields, just click anywhere on the map at the bottom. It doesn't matter if it's right on top of the project or in the Sahara desert - I extract the data from the fields to locate the project and then disregard the location you click.
+> After filling out all the fields, **just click anywhere on the map at the bottom**. It doesn't matter if it's right on top of the project or in the Sahara desert - _I extract the data from the fields to locate the project and then disregard the location you click._
 > 
 > If anything needs to be added to the drop-down lists, please let Stephen know before you fill out the form.
 > 
-> Project Naming Convention: 
+> *Project Naming Convention: *
 > 
-> Project Town Name (Proper Case) + Project Number
+> *Project Town Name (Proper Case) + Project Number*
 > 
-> Example:
+> _Examples:_
 > 
 > Arlington STP 0114(4)
 > 
@@ -114,17 +114,17 @@ Geoform Configuration Steps:
 
 5. Add description
 
-> Use this form to submit status updates to your projects. This is the same as updating the projects spreadsheet, except you can fill this form out any time, not just every two weeks.
+> Use this form to submit status updates to your projects. This is the same as updating the projects spreadsheet, except you can fill this form out **any time**, not just every two weeks.
 > 
 > Only fill in the boxes in the form that have updates or changes. You don't have to fill in the same information each time.  
 > 
-> For example, if the project was setup with an Advertise Target of Fall 2016, you should only put an update in the Advertise Target box if the target has changed. You don't have to fill out the target every time.
+> For example, if the project was setup with an *Advertise Target* of "Fall 2016", you should only put an update in the Advertise Target box if the target has changed. _You don't have to fill out the target every time._
 > 
-> The same thing applies to the various Clearance boxes. If you previously put No in the ROW Clearance box, you don't have to do that each time. Change it to Yes once you receive the clearance.
+> The same thing applies to the various *Clearance* boxes. If you previously put "No" in the *ROW Clearance* box, you don't have to do that each time. Change it to Yes once you receive the clearance.
 > 
-> However, please note that each update must contain at least the Project Name and Project Manager (your name).
+> *However, please note* that each update must contain at least the **Project Name** and **Project Manager** (your name).
 > 
-> Once filled out, click anywhere on the map at the bottom (it doesn't matter where) and hit Submit.
+> Once filled out, click *anywhere* on the map at the bottom _(it doesn't matter where)_ and hit *Submit.*
 > 
 > Please note that anything you submit cannot be changed. If you have corrections please fill out the same form again and note the issue.
 
