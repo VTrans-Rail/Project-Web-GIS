@@ -114,13 +114,27 @@ Geoform Configuration Steps:
 
 5. Add description
 
-> Please fill out this form whenever the status changes. Please note the required fields <em>Project Name</em>, <em>Project Manager</em>. Once filled out, click <em>anywhere</em> on the map (it doesn't matter where) and hit <em>Submit</em>.
-> More things may need to be added later.
+> Use this form to submit status updates to your projects. This is the same as updating the projects spreadsheet, except you can fill this form out any time, not just every two weeks.
+> 
+> Only fill in the boxes in the form that have updates or changes. You don't have to fill in the same information each time.  
+> 
+> For example, if the project was setup with an Advertise Target of Fall 2016, you should only put an update in the Advertise Target box if the target has changed. You don't have to fill out the target every time.
+> 
+> The same thing applies to the various Clearance boxes. If you previously put No in the ROW Clearance box, you don't have to do that each time. Change it to Yes once you receive the clearance.
+> 
+> However, please note that each update must contain at least the Project Name and Project Manager (your name).
+> 
+> Once filled out, click anywhere on the map at the bottom (it doesn't matter where) and hit Submit.
+> 
+> Please note that anything you submit cannot be changed. If you have corrections please fill out the same form again and note the issue.
 
-6. Add `Required` as Help Text on the
+6. Field notes:
+  - Add `Required` as Help Text on the Project Name and Project Manager fields
 
-7. Change the `Status Update` and `Action Items` fields to `Textarea`
-
+  - Change the `Status Update` and `Action Items` fields to `Textarea`
+  
+7. Move the Project Manager field below the Project Name field
+  
 8. Select Theme `United`
 
 9. Uncheck `Share Geoform`, `My Location`, and `Latitude & Longitude Coordinates`
