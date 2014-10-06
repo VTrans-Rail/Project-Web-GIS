@@ -50,7 +50,7 @@ Starting from a new map:
 > 
 > If anything needs to be added to the drop-down lists, please let Stephen know before you fill out the form.
 > 
-> *Project Naming Convention: *
+> *Project Naming Convention*
 > 
 > *Project Town Name (Proper Case) + Project Number*
 > 
@@ -69,8 +69,7 @@ Starting from a new map:
 
   - Add `Do you want this included in reports and the map?`
   - Add `See naming convention above` in the Project Name `Hint` field
-  
-7. Add `See Map Below` as Hint on the `AssetID` field  
+  - Add `See Map Below` as Hint on the `AssetID` field  
 
 8. Change `ProjectDescription` section input to `Textarea`  
 
