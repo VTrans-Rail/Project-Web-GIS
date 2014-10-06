@@ -187,10 +187,26 @@ Build the Dashboard
 
 6. Hit `OK`
 
-7. Add a List widget for the `Asset Projects` data and title it `Latest Asset Projects` and have it sort by `created_date` descending. Enable the following feature actions: `Show pop-up, Highlight, Pan to, Select, Zoom to` and set the Doule click action to `Zoom to`. Dock this on the right.
+7. Add a List widget for the `Asset Projects` data
+  - Title: `Latest Asset Projects` 
+  - Sort by `last_edited_date` descending 
+  - Enable the following feature actions
+    - Show pop-up
+    - Highlight
+    -  Pan to
+    - Select
+    - Zoom to 
+    - Set the Double click action to `Zoom to`. 
+  - Dock this on the right
 
-8. Add a List widget for the `Track Projects` data and title it `Latest Track Projects` and have it sort by `created_date` descending. Enable the following feature actions: `Show pop-up, Highlight, Pan to, Select, Zoom to` and set the Doule click action to `Zoom to`. Dock this below the `Latest Asset Projects` list widget.
-
-9. Add a List widget for the `Track Projects` data and title it `Latest Project Status Updates` and have it sort by `created_date` descending. Enable the following feature actions: `Show pop-up, Highlight, Pan to, Select, Zoom to` and set the Doule click action to `Zoom to`. Dock this below the `Latest Asset Projects` list widget.
-
-![Thumbnail]()
+8. Add a List widget for the `Track Projects` data
+  - Title: `Latest Track Projects` 
+  - Sort by `last_edited_date` descending 
+  - Enable the following feature actions
+    - Show pop-up
+    - Highlight
+    -  Pan to
+    - Select
+    - Zoom to 
+    - Set the Double click action to `Zoom to`. 
+  - Dock this below the `Latest Asset Projects` widget
