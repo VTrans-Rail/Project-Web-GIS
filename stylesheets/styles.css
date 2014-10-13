@@ -183,13 +183,17 @@ footer {
   bottom:50px;
 }
 
+iframe, object, embed {
+  max-width: 100%;
+}
+
 @media print, screen and (max-width: 960px) {
   
   div.wrapper {
     width:auto;
     margin:0;
-  }
-  
+  } 
+
   header, section, footer {
     float:none;
     position:static;
@@ -200,7 +204,7 @@ footer {
     padding-right:320px;
   }
   
-  section {
+  section, iframe {
     border:1px solid #e5e5e5;
     border-width:1px 0;
     padding:20px 0;
