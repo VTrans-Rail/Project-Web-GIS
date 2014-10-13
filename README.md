@@ -1,7 +1,9 @@
-VTrans Rail - Project Management Web GIS
+Project Management Web Forms
 ===============
 
-This system is designed to allow for easy and flexible project managment using web based GIS tools. It is intended to eliminate the need for passing around an Excel spreadsheet and allow for more robust storage and easier reporting. 
+This system allows for very simple data entry and analysis
+
+This system is designed to allow for easy and flexible project management using web based GIS tools. It is intended to eliminate the need for passing around an Excel spreadsheet and allow for more robust storage and easier reporting. 
 
 ###Main Components:
 - Project Review Dashboard 
