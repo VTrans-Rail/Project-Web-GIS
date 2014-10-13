@@ -81,6 +81,7 @@ Starting from a new map:
   - Add `See naming convention above` in the Project Name `Hint` field
   - Add `See Map Below` as Hint on the `AssetID` field  
   - Add `"All CAPS"` note to PIN field
+  - Change `Asset Number` text to `Asset Name` and put help text "Example: "Bridge 308" or "DOT 123-456X"
 
 8. Change `ProjectDescription` section input to `Textarea`  
 
