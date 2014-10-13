@@ -19,6 +19,9 @@ Starting from a new map:
 2. Rename feature <del>PROJ AddNew - </del>Add New Project  
 
 3. Add `AssetID` [service](http://vtransmap01.aot.state.vt.us/arcgis/rest/services/Rail/AssetID/FeatureServer/0) to the map  
+  - Filter out other spans - only link to span 1. ((`OtherAssetID ends with` "s1") or `Asset =` "Crossing" or `Asset =` "Culvert" or `Asset =` Switch)
+
+4. Add Bridges, Crossings services to the map
 
 4. Rename <del>AssetID - </del> Asset ID Schema  
 
@@ -46,6 +49,13 @@ Starting from a new map:
 
 > Use this form to add a new project to the database. This is the same as adding a new row to your projects spreadsheet. Fill this out once you want the project to appear on the map. The information you provide here doesn't have to be complete right away, but please note that certain fields are required, notably **Project Name, Project Type, AssetID, Rail Line, and FromMP**. Later edits will be slightly difficult ([instructions here](http://www.github.com)), so the more you can provide up front the easier you make your life.
 > 
+>AssetID Instructions
+>
+>The AssetID field is a common identification field across all assets. It is required because that is how I will locate your project on the map. You can look up the AssetID in the map at the bottom of this form. Search for or zoom to the project area and then look for a colored circle with a label like this image:
+>![image](url.com)
+>
+>To verify you're looking at the correct asset you can click on the map to see the popup containing the asset name such as bridge number of crossing DOT number.
+>
 > After filling out all the fields, **just click anywhere on the map at the bottom**. It doesn't matter if it's right on top of the project or in the Sahara desert - _I extract the data from the fields to locate the project and then disregard the location you click._
 > 
 > If anything needs to be added to the drop-down lists, please let Stephen know before you fill out the form.
@@ -70,6 +80,7 @@ Starting from a new map:
   - Add `Do you want this included in reports and the map?`
   - Add `See naming convention above` in the Project Name `Hint` field
   - Add `See Map Below` as Hint on the `AssetID` field  
+  - Add `"All CAPS"` note to PIN field
 
 8. Change `ProjectDescription` section input to `Textarea`  
 
