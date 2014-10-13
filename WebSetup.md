@@ -52,7 +52,7 @@ Starting from a new map:
 >AssetID Instructions
 >
 >The AssetID field is a common identification field across all assets. It is required because that is how I will locate your project on the map. You can look up the AssetID in the map at the bottom of this form. Search for or zoom to the project area and then look for a colored circle with a label like this image:
->![image](url.com)
+>![image](https://raw.githubusercontent.com/VTrans-Rail/Project-Web-GIS/master/img/AssetID.PNG)
 >
 >To verify you're looking at the correct asset you can click on the map to see the popup containing the asset name such as bridge number of crossing DOT number.
 >
