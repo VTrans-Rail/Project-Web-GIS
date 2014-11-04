@@ -7,4 +7,6 @@
 - When you add fields to the feature class
 
 
-##Republish the service
+##Republish (overwrite) the service
+- Change in symbology from the MXD 
+  - Didn't have to re-add to the map
