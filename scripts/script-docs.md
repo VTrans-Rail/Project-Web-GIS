@@ -12,7 +12,8 @@ Right now the domains are set by the values in the CSV
 
 It would be nice to have some of the domains drawn from a query of the data source
 
-The biggest need would be projects that are "completed" from our perspective (gone to contract) will no longer need to be in the drop down because there are no more status updates
+The biggest need would be projects that are "completed" from our perspective (gone to contract) 
+will no longer need to be in the drop down because there are no more status updates
 
 Same could apply to project managers and POC info 
 
@@ -50,8 +51,7 @@ _VRLID_ expands into:
 - StateOwned
 - RailTrail
 
-|           Field           |     Description     |        Domain       |       Add Project       |         Projects        |      Status Update      |
-|                           |                     |                     |          WebFC          |          Table          |          WebFC          |
+|           Field           |     Description     |        Domain       |    Add Project WebFC    |      Projects Table     |   Status Update WebFC   |
 |---------------------------|---------------------|---------------------|-------------------------|-------------------------|-------------------------|
 | Project Name              | Project Name        |                     | :ballot_box_with_check: | :ballot_box_with_check: | :ballot_box_with_check: |
 | Project Type              | Project Type        | _ProjectType_       | :ballot_box_with_check: | :ballot_box_with_check: |                         |
