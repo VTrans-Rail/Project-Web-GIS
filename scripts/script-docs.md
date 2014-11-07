@@ -91,3 +91,23 @@ _VRLID_ expands into:
 | Full project description    | Long description       |                       | :ballot_box_with_check:     | :ballot_box_with_check:     |                             |
 | Rail Trail                  | Is rail trail?         | _Boolean_             |                             | :ballot_box_with_check:     |                             |
 | Include                     | Include in reports     | _Boolean_             | :ballot_box_with_check:     | :ballot_box_with_check:     |                             |
+
+
+##2_Create Status Update Table
+
+This table will take the fields from the **Status Update WebFC** and add:
+```
+- VRLID
+- FromMP
+- ToMP
+```
+
+Which are required for dyn-segging
+
+##3_Merge_Projects_Backup_Table
+
+I have a backup copy of the projects table with the existing projects (as of 9/29) in a GDB. This moves the data into the SDE table after re-building
+
+##4_Status Table Relate
+
+This relates the Projects Lines FC
