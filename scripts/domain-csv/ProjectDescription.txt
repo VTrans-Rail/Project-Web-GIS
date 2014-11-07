@@ -1,0 +1,29 @@
+CODE, DESCRIPTION
+BridgeApp, Bridge approach stabilization
+BridgeEmer, Bridge emergency repair
+BridgeNewAppRock, Bridge new approach and rock stabilization
+BridgeSuper, Bridge new superstructure and substructure
+BridgeNewSuperSubRehab, Bridge new superstructure, substructure rehab
+BridgeRehab, Bridge rehabilitation
+BridgeRepl, Bridge replacement
+BridgeSuperRehabSubRehab, Bridge superstructure and substructure rehab
+BridgeOther, Bridge - Other
+CrossingFullDepth, Crossing full depth reconstruction
+Crossing, Crossing - Other
+CulvertNew, Culvert new installation
+CulvertRepairSlope, Culvert repair, slope stabilization
+CulvertOther, Culvert - Other
+TrackInstCWR, Track install CWR, ties, and ballast
+TrackPurchCWR, Track purchase CWR
+TrackPurchTiesBallast, Track purchase ties and ballast
+TrackSlope, Track slope stabilization
+TrackOther, Track - Other
+Switch, Switch
+Other, Other
+NA, N/A
+
+
+
+
+
+

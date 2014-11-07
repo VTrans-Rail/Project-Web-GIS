@@ -1,0 +1,10 @@
+CODE, DESCRIPTION
+GMRC, GMRC Bellows Falls
+VTR_BR, VTR B&R
+WACR_Brad, WACR CRL - Bradford
+VTR_N, VTR Northern
+LVRT, Lamoille Valley Rail Trail
+WACR_Lyn, WACR Lyndonville
+WACR_MB, WACR M&B
+MMA, MM&A
+CLP, CLP

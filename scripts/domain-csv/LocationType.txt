@@ -1,0 +1,5 @@
+CODE, DESCRIPTION
+Point, Single Point Project (ex: one xing)
+MultiPoint, Multi Point Project (ex: multiple xings)
+Line, Linear project with start and end MP
+MultiLine, Linear project with several sections

@@ -1,0 +1,11 @@
+CODE, DESCRIPTION
+Tran, TranSystems
+VHB, Vanasse Hangen Brustlin
+Stantec, Stantec
+DuBois, DuBois & King
+PB, Parsons Brinckerhoff
+VTrans, VTrans In-house
+Jacobs, Jacobs
+CHA, CHA
+Other, Other
+NA, N/A

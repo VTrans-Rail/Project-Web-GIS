@@ -1,0 +1,6 @@
+CODE, DESCRIPTION
+Karl, Karl Richardson
+Jim, Jim Harris
+Bernie, Bernie Chenette
+Mike, Mike Chenette
+NA, None

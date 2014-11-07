@@ -1,0 +1,36 @@
+CODE, DESCRIPTION
+RREW12K,Cavendish RREW12K
+WCRS(10),Clarendon WCRS(10)
+WCRS(8),Dorset WCRS(8)
+RREW12J,Rockingham RREW12J
+GMRC(11),Chester GMRC(11)
+RRE4178A,Fairlee RRE4178A
+VTRY(1),Rutland-Burlington VTRY(1)
+VTRY(2),Rutland-Burlington VTRY(2)
+VTRY(3),Rutland-Burlington VTRY(3)
+REW4140A,East Wallingford REW4140A
+RREW001D,Ferrisburgh RREW001D
+RREW12U,Hardwick RREW12U
+RREW001F,Highgate RREW001F
+REW4001A,St. Johnsbury REW4001A
+STP 0114(4),Arlington STP 0114(4)
+HPP ABRB(9),Pittsford HPP ABRB(9)
+STP GMRC(9),Rockingham STP GMRC(9)
+WCRS(26),Shaftsbury WCRS(26)
+WCRS(19),Sunderland WCRS(19)
+WCRS(25),Sunderland WCRS(25)
+RREW001A,New Haven RREW001A
+RREW001B,New Haven RREW001B
+RREW001C,New Haven RREW001C
+STP 0286(6),Barton STP 0286(6)
+STP 2033(25) ,Clarendon STP 2033(25) 
+STP 2033(24),Leicester STP 2033(24)
+STP 2033(23),Ludlow STP 2033(23)
+STP 0261(42),Barre City STP 0261(42)
+WCRS(9),Middlebury WCRS(9)
+GMRC(10),Rockingham GMRC(10)
+GMRC(18),Rockingham GMRC(18)
+STP 2030(7),Newport-Richford STP 2030(7)
+STP 2033(26),Hydeville STP 2033(26)
+WCRS(18),New Haven WCRS(18)
+STP 6400(30),Montpelier STP 6400(30)
