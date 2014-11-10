@@ -4,7 +4,7 @@ Here are all the tools I built to process GeoForms into GIS data for review in d
 
 Here is an approximation of the process:
 
-![image](img/Flowchart.png)
+![image](/img/Flowchart.png)
 
 ##0_Create Domains
 
