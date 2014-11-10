@@ -96,11 +96,11 @@ _VRLID_ expands into:
 ##2_Create Status Update Table
 
 This table will take the fields from the **Status Update WebFC** and add:
-```
+
 - VRLID
 - FromMP
 - ToMP
-```
+
 
 Which are required for dyn-segging
 
@@ -110,4 +110,114 @@ I have a backup copy of the projects table with the existing projects (as of 9/2
 
 ##4_Status Table Relate
 
-This relates the Projects Lines FC
+This relates the dyn-segged **Projects FC's** (Points & Lines) to the **Status_Update** Table
+
+##5_Enable_Tracking_Versioned
+
+This registers as versioned and enables editor tracking on the following datasets. 
+
+- Projects table
+- StatusUpdate WebFC
+- Status Update Table
+- AddProject WebFC
+
+This was done as a separate step because they never executed properly in the same model the created the feature classes
+
+##6_AddProject Append Calc VRLID
+
+Appends projects added from the **Add Project WebFC** from the GeoForm to the **Projects table**.
+
+Then it calculates the _VRLID_ field based on the provided _AssetID_
+
+###Features Needed
+```
+Case where there is no AssetID given (in error)
+Case where there is no AssetID given (none exists)
+```
+
+##7_AddProject Join Calculate DynSeg
+
+Takes the **Projects Table** and expands the _VRLID_ into:
+
+- LineName
+- Operator
+- Division
+- Subdivision
+- Branch
+- StateOwned
+- RailTrail
+
+Creates a QueryTable to split the table into Points and Lines
+
+###Features Needed
+```
+Case: multi-point
+Case: multi-line
+```
+
+Dyn-seggs each query table
+
+Exports them to **PROJ_Lines** and **PROJ_Points**
+
+Adds EditorTracking fields because the model tool won't add them
+- created_user
+- created_date
+- last_edited_user
+- last_edited_date
+
+Updates the domain based on the added project
+
+Deletes all rows from the **AddProject WebFC** so that next time duplicates won't get imported
+
+##8_StatusUpdate_Append
+
+Appends any status updates from the **StatusUpdate WebFC** to the **Status_Table**
+
+##9_StatusUpdate_DynSeg
+
+Dyn-seggs the project status updates so they can be analyzed in Operations Dashboard
+
+Joins **Status Update** table to **Projects** table 
+
+Calculates _VRLID, FromMP, ToMP_
+
+Makes a table view to split out lines and points
+
+###Features Needed
+```
+Case: multi-point
+Case: multi-line
+```
+
+Dyn-seggs points and lines
+
+Exports events to feature classes:
+
+- **PROJ_StatusLines**
+- **PROJ_StatusPoints**
+
+
+###Overall Features Needed
+```
+Automation - either on demand, hourly, or nightly runs
+Reporting - either on demand, hourly, or nightly report/spreadsheet exports that the PMs could review (they want to see previous updates)
+Could either of these be geoprocessing services they could run themselves?
+CaSe TeStInG - Convert to Proper Case or ALL CAPS
+Custom domains - PMs filter out their projects for updates
+Map out how to locate (dyn seg) the projects to simplify data entry
+- Minimum entries - Just AssetID? What if none exist? Asset type/number/MP?
+Removing "done" projects - needs definition from Schultz
+Embed the forms in an easy-to-access website
+
+Automated error reporting 
+- Missing key values
+- MPs out of range
+
+User error reporting
+- "I messed up a submission, please delete/update/fix"
+- "I forgot to put something in"
+
+Wishlist:
+VPINS integration? Project names, PIN numbers, contact information, or other data extracts? Dates? Costs?
+"Presentation Mode" - synchronize map views to remote PMs
+```
