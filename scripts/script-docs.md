@@ -1,5 +1,7 @@
 #Script Documentation
 
+Here are all the tools I built to process 
+
 ##0_Create Domains
 
 References a set of simple CSV files that will create (or replace) current domain values
@@ -112,6 +114,8 @@ I have a backup copy of the projects table with the existing projects (as of 9/2
 
 This relates the dyn-segged **Projects FC's** (Points & Lines) to the **Status_Update** Table
 
+This seems like it's a little out of place, but remember that most times the feature classes are already created and are appended by this whole process. 
+
 ##5_Enable_Tracking_Versioned
 
 This registers as versioned and enables editor tracking on the following datasets. 
@@ -200,7 +204,8 @@ Exports events to feature classes:
 ###Overall Features Needed
 ```
 Automation - either on demand, hourly, or nightly runs
-Reporting - either on demand, hourly, or nightly report/spreadsheet exports that the PMs could review (they want to see previous updates)
+Reporting - either on demand, hourly, or nightly report/spreadsheet exports that the PMs could review 
+    (they want to see previous updates)
 Could either of these be geoprocessing services they could run themselves?
 CaSe TeStInG - Convert to Proper Case or ALL CAPS
 Custom domains - PMs filter out their projects for updates
