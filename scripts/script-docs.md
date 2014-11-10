@@ -1,6 +1,10 @@
 #Script Documentation
 
-Here are all the tools I built to process 
+Here are all the tools I built to process GeoForms into GIS data for review in dashboards, maps, and reports.
+
+Here is an approximation of the process:
+
+![image](img/Flowchart.png)
 
 ##0_Create Domains
 
@@ -203,6 +207,7 @@ Exports events to feature classes:
 
 ###Overall Features Needed
 ```
+Testing to ensure the process is robust
 Automation - either on demand, hourly, or nightly runs
 Reporting - either on demand, hourly, or nightly report/spreadsheet exports that the PMs could review 
     (they want to see previous updates)
