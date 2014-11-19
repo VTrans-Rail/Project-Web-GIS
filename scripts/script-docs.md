@@ -6,6 +6,24 @@ Here is an approximation of the process:
 
 ![image](/img/Flowchart.png)
 
+##Overview:
+
+####One-Time Tasks
+_Creation, data backup, merging, etc_
+
+0_Create Domains
+1_Create WebFC and Project Table
+2_Create Status Update Table
+3_Merge_Projects_Backup_Table
+5_Enable_Tracking_Versioned
+
+####Repetitive Tasks
+6_AddProject Append Calc VRLID
+4_Status Table Relate
+
+New: Update domains
+
+
 ##0_Create Domains
 
 References a set of simple CSV files that will create (or replace) current domain values
