@@ -9,19 +9,24 @@ Here is an approximation of the process:
 ##Overview:
 
 ####One-Time Tasks
+######And their approximate order
 _Creation, data backup, merging, etc_
+  
+0_Create Domains  
+1_Create WebFC and Project Table  
+2_Create Status Update Table  
+3_Merge_Projects_Backup_Table  
+5_Enable_Tracking_Versioned  
 
-0_Create Domains
-1_Create WebFC and Project Table
-2_Create Status Update Table
-3_Merge_Projects_Backup_Table
-5_Enable_Tracking_Versioned
+####Repetitive Tasks  
+6_AddProject Append Calc VRLID  
+7_AddProject Join Calculate DynSeg
 
-####Repetitive Tasks
-6_AddProject Append Calc VRLID
+8_StatusUpdate_Append
+7_AddProject Join Calculate DynSeg
 4_Status Table Relate
 
-New: Update domains
+*New: Update domains based on changes*
 
 
 ##0_Create Domains
