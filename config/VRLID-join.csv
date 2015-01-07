@@ -1,0 +1,27 @@
+VRLID,LineName,Operator,Division,Subdivision,Branch,StateOwned,RailTrail,RailLineDescription,RailLineCode
+VRL01,ST,Springfield Terminal Railway Co.,Boston & Maine Division,None,,N,N,ST Boston & Maine Division,ST_BM
+VRL02,NECR,New England Central Railroad Inc.,New England Central Railroad Division,Palmer,,N,N,NECR Palmer,NECR_Palmer
+VRL03,NECR,New England Central Railroad Inc.,New England Central Railroad Division,Roxbury,,N,N,NECR Roxbury,NECR_Rox
+VRL04,NECR,New England Central Railroad Inc.,New England Central Railroad Division,Swanton,,N,N,NECR Swanton,NECR_Swan
+VRL05,VTR,Vermont Railway Inc.,Vermont Railway,Northern,,Y,N,VTR Northern,VTR_N
+VRL06,VTR,Vermont Railway Inc.,Vermont Railway,B&R,,Y,N,VTR B&R,VTR_BR
+VRL07,VTR,Vermont Railway Inc.,Vermont Railway,B&R,Bennington,Y,N,VTR B&R - Bennington,VTR_Benn
+VRL08,GMRC,Green Mountain Railroad Corp,Green Mountain Railroad,Bellows Falls,,Y,N,GMRC Bellows Falls,GMRC
+VRL09,CLP,Clarendon & Pittsford Railroad Co.,Clarendon & Pittsford Railroad,,,N,N,CLP,CLP_Main
+VRL10,VTR,Vermont Railway Inc.,Vermont Railway,Hoosick,,Y,N,VTR Hoosick,VTR_Hoo
+VRL11,WACR,Washington County Railroad Co.,Washington County Railroad Conn River Division,Bradford,,Y,N,WACR Bradford,WACR_Brad
+VRL13,LVRT,VAST,Lamoille Valley Rail Trail,,,Y,Y,LVRT,LVRT
+VRL15,TSRR,Twin State Railroad,Twin State Railroad,,,N,N,TSRR,TSRR
+VRL16,SLA,Genesse & Wyoming Canada Inc.,St Lawrence & Atlantic Railroad Division,Berlin,,N,N,SLA Berlin,SLA_B
+VRL17,SLA,Genesse & Wyoming Canada Inc.,St Lawrence & Atlantic Railroad Division,Sherbrooke,,N,N,SLA Sherbrooke,SLA_S
+VRL18,NECR,New England Central Railroad Inc.,New England Central Railroad Division,Burlington,,N,N,NECR Burlington,NECR_Burl
+VRL19,MMA,Montreal Maine & Atlantic Inc.,Montreal Maine & Atlantic Railroad Division,Newport South,,N,N,MMA Newport South,MMA
+VRL20,MMA,Montreal Maine & Atlantic Inc.,Montreal Maine & Atlantic Railroad Division,Newport South,,N,N,MMA Newport South,
+VRL21,WACR,Washington County Railroad Co.,Washington County Railroad Conn River Division,Lyndonville,,Y,N,WACR Lyndonville,WACR_Lynd
+VRL22,DHRT,VAST,Delaware & Hudson Rail Trail,,,Y,Y,DHRT,DHRT
+VRL22,DHRT,VAST,Delaware & Hudson Rail Trail,,,Y,Y,DHRT,
+VRL22,DHRT,VAST,Delaware & Hudson Rail Trail,,,Y,Y,DHRT,
+VRL23,MVRT,VAST,Misissquoi Valley Rail Trail,,,Y,Y,MVRT,MVRT
+VRL24,BBRT,VAST,Beebe Spur Rail Trail,,,Y,Y,BBRT,BBRT
+VRL12,WACR,Washington County Railroad Co.,Washington County Railroad Montpelier & Barre,M&B,,Y,N,WACR M&B, WACR M&B
+VRL14,CLP,Clarendon & Pittsford Railroad Co.,Clarendon & Pittsford Railroad,,Florence,N,N,CLP,CLP_Florence

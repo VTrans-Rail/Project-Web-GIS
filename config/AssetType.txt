@@ -1,0 +1,6 @@
+CODE, DESCRIPTION
+Bridge, Bridge
+Culvert, Culvert
+Track, Track
+Crossing, Crossing
+Slope, Slope
