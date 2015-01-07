@@ -1,5 +1,5 @@
 """
-Rail Projects - This script will process status updates created by consultant/contractors in order to create a history.
+Rail Projects Initial Build - This script initializes the system for processing status updates created by consultant/contractors in order to create a history.
 It is based on a series of scripts exported from Model Builder.
 
 Created/Updated By: Rick Scott
@@ -63,11 +63,13 @@ for line in lines:
             ProjectDescription_txt = line[line.index("= \"")+3:len(line)-2]
             print ProjectDescription_txt
         elif "Status_Update_WebFC" in line:
-            Status_Update_WebFC = sdeRail + "/" + line[line.index("= \"")+3:len(line)-2]
-            print Status_Update_WebFC
+            DDEV_Status_Update_WebFC = sdeDDev + "/" + line[line.index("= \"")+3:len(line)-2]
+            RAIL_Status_Update_WebFC = sdeRail + "/" + line[line.index("= \"")+3:len(line)-2]
+            print DDEV_Status_Update_WebFC
+            print RAIL_Status_Update_WebFC
         elif "PROJ_Status_Updates__Table_" in line:
-            PROJ_Status_Updates__Table_ = sdeDDev + "/" + line[line.index("= \"")+3:len(line)-2]
-            print PROJ_Status_Updates__Table_
+            DDEV_PROJ_Status_Updates__Table_ = sdeDDev + "/" + line[line.index("= \"")+3:len(line)-2]
+            print DDEV_PROJ_Status_Updates__Table_
         elif "dev_gdb_Projects_Backup" in line:
             dev_gdb_Projects_Backup = line[line.index("= \"")+3:len(line)-2]
             print dev_gdb_Projects_Backup
@@ -76,26 +78,13 @@ for line in lines:
             RAIL_Projects_Table = sdeRail + "/" + line[line.index("= \"")+3:len(line)-2]
             print DDEV_Projects_Table
             print RAIL_Projects_Table
+        elif "Add_Project_WebFC" in line:
+            DDEV_Add_Project_WebFC = sdeDDev + "/" + line[line.index("= \"")+3:len(line)-2]
+            RAIL_Add_Project_WebFC = sdeRail + "/" + line[line.index("= \"")+3:len(line)-2]
+            print DDEV_Add_Project_WebFC
+            print RAIL_Add_Project_WebFC
         else:
             pass
-
-###set up global SDE connections
-###sdeRail = "C:/BatchJobs/SDEConnections/GDB_Rail(Rail_Admin).sde"
-###sdeDDev = "C:/BatchJobs/SDEConnections/AOTGISTST01-GDB_DDev(WIN).sde"
-##sdeDDev = "C:/BatchJobs/SDEConnections/AOTGISTST01-GDB_DDev(DDev_Admin).sde"
-###sdeDDev = "C:/BatchJobs/SDEConnections/AOTGISTST01-GDB_DDev(VTrans_Admin).sde"
-##
-###Initialize global variables
-##ConsultantPM_txt = "V:\\Projects\\Specials\\Rail_Inventory_and_Condition\\_dev\\ProjectsWeb\\script\\ConsultantPM.txt"
-##VTransPM_txt = "V:\\Projects\\Specials\\Rail_Inventory_and_Condition\\_dev\\ProjectsWeb\\script\\VTransPM.txt"
-##Consultants_txt = "V:\\Projects\\Specials\\Rail_Inventory_and_Condition\\_dev\\ProjectsWeb\\script\\Consultants.txt"
-##ConsultantsContact_txt = "V:\\Projects\\Specials\\Rail_Inventory_and_Condition\\_dev\\ProjectsWeb\\script\\ConsultantsContact.txt"
-##ProjectType_txt = "V:\\Projects\\Specials\\Rail_Inventory_and_Condition\\_dev\\ProjectsWeb\\script\\ProjectType.txt"
-##LocationType_txt = "V:\\Projects\\Specials\\Rail_Inventory_and_Condition\\_dev\\ProjectsWeb\\script\\LocationType.txt"
-##VRLID_join_csv = "V:\\Projects\\Specials\\Rail_Inventory_and_Condition\\_dev\\ProjectsWeb\\script\\VRLID-join.csv"
-##AssetType_txt = "V:\\Projects\\Specials\\Rail_Inventory_and_Condition\\_dev\\ProjectsWeb\\script\\AssetType.txt"
-##AllPMs_txt = "V:\\Projects\\Specials\\Rail_Inventory_and_Condition\\_dev\\ProjectsWeb\\script\\AllPMs.txt"
-##ProjectDescription_txt = "V:\\Projects\\Specials\\Rail_Inventory_and_Condition\\_dev\\ProjectsWeb\\script\\ProjectDescription.txt"
 
 def createDomains():
     try:
@@ -114,65 +103,65 @@ def createDomains():
         global ProjectDescription_txt
 
         print "Creating domains..."
-        # Process: Table To Domain
+# Process: Table To Domain
         arcpy.TableToDomain_management(ConsultantPM_txt, "CODE", "DESCRIPTION", sdeDDev, "ConsultantPM", "Consultant Project Managers", "REPLACE")
 
-        # Process: Table To Domain (2)
+# Process: Table To Domain (2)
         arcpy.TableToDomain_management(VTransPM_txt, "CODE", "DESCRIPTION", sdeDDev, "VTransPM", "VTrans Project Managers", "REPLACE")
 
-        # Process: Table To Domain (3)
+# Process: Table To Domain (3)
         arcpy.TableToDomain_management(Consultants_txt, "CODE", "DESCRIPTION", sdeDDev, "Consultants", "Design Consultants", "REPLACE")
 
-        # Process: Table To Domain (4)
+# Process: Table To Domain (4)
         arcpy.TableToDomain_management(ConsultantsContact_txt, "CODE", "DESCRIPTION", sdeDDev, "ConsultantContact", "Consultant Contact Info", "REPLACE")
 
-        # Process: Table To Domain (5)
+# Process: Table To Domain (5)
         arcpy.TableToDomain_management(VRLID_join_csv, "RailLineCode", "RailLineDescription", sdeDDev, "RailLine", "Rail Line", "REPLACE")
 
-        # Process: Table To Domain (6)
+# Process: Table To Domain (6)
         arcpy.TableToDomain_management(AssetType_txt, "CODE", "DESCRIPTION", sdeDDev, "AssetType", "Asset Type", "REPLACE")
 
-        # Process: Table To Domain (7)
+# Process: Table To Domain (7)
         arcpy.TableToDomain_management(LocationType_txt, "CODE", "DESCRIPTION", sdeDDev, "LocType", "Project Location Type (Point, Line, Multi)", "REPLACE")
 
-        # Process: Table To Domain (9)
+# Process: Table To Domain (9)
         arcpy.TableToDomain_management(ProjectType_txt, "CODE", "DESCRIPTION", sdeDDev, "ProjectType", "Project Type", "REPLACE")
 
-        # Process: Table To Domain (10)
+# Process: Table To Domain (10)
         arcpy.TableToDomain_management(AllPMs_txt, "CODE", "DESCRIPTION", sdeDDev, "AllPMs", "All Project Managers", "REPLACE")
 
-        # Process: Table To Domain (8)
+# Process: Table To Domain (8)
         arcpy.TableToDomain_management(ProjectDescription_txt, "CODE", "DESCRIPTION", sdeDDev, "ProjDescript", "Basic Project Description", "REPLACE")
 
         print "Sorting coded value domains..."
-        # Process: Sort Coded Value Domain
+# Process: Sort Coded Value Domain
         arcpy.SortCodedValueDomain_management(sdeDDev, "VTransPM", "CODE", "ASCENDING")
 
-        # Process: Sort Coded Value Domain (2)
+# Process: Sort Coded Value Domain (2)
         arcpy.SortCodedValueDomain_management(sdeDDev, "Consultants", "CODE", "ASCENDING")
 
-        # Process: Sort Coded Value Domain (3)
+# Process: Sort Coded Value Domain (3)
         arcpy.SortCodedValueDomain_management(sdeDDev, "ConsultantContact", "CODE", "ASCENDING")
 
-        # Process: Sort Coded Value Domain (4)
+# Process: Sort Coded Value Domain (4)
         arcpy.SortCodedValueDomain_management(sdeDDev, "ProjectType", "CODE", "ASCENDING")
 
-        # Process: Sort Coded Value Domain (5)
+# Process: Sort Coded Value Domain (5)
         arcpy.SortCodedValueDomain_management(sdeDDev, "RailLine", "CODE", "ASCENDING")
 
-        # Process: Sort Coded Value Domain (6)
+# Process: Sort Coded Value Domain (6)
         arcpy.SortCodedValueDomain_management(sdeDDev, "AssetType", "CODE", "ASCENDING")
 
-        # Process: Sort Coded Value Domain (7)
+# Process: Sort Coded Value Domain (7)
         arcpy.SortCodedValueDomain_management(sdeDDev, "AllPMs", "CODE", "ASCENDING")
 
-        # Process: Sort Coded Value Domain (8)
+# Process: Sort Coded Value Domain (8)
         arcpy.SortCodedValueDomain_management(sdeDDev, "ProjDescript", "CODE", "ASCENDING")
 
-        # Process: Sort Coded Value Domain (9)
+# Process: Sort Coded Value Domain (9)
         arcpy.SortCodedValueDomain_management(sdeDDev, "ConsultantPM", "CODE", "ASCENDING")
 
-        # Process: Sort Coded Value Domain (10)
+# Process: Sort Coded Value Domain (10)
         arcpy.SortCodedValueDomain_management(sdeDDev, "LocType", "CODE", "ASCENDING")
 
     except Exception, msg:
@@ -182,26 +171,34 @@ def createDomains():
 
 def createStatusUpdateTable():
     try:
-        global PROJ_Status_Updates__Table_
-        global Status_Update_WebFC
+        global DDEV_PROJ_Status_Updates__Table_
+        global DDEV_Status_Update_WebFC
+        global RAIL_Status_Update_WebFC
+
+        if arcpy.Exists(DDEV_Status_Update_WebFC):
+            print "Existing Project Status Update feature class found.  Deleting existing feature class..."
+            arcpy.Delete_management(DDEV_Status_Update_WebFC)
+
+        print "Copying production status update feature class to development..."
+        arcpy.FeatureClassToGeodatabase_conversion(RAIL_Status_Update_WebFC,sdeDDev)            
         
-        if arcpy.Exists(PROJ_Status_Updates__Table_):
+        if arcpy.Exists(DDEV_PROJ_Status_Updates__Table_):
             print "Existing Project Status Update table found.  Deleting existing table..."
-            arcpy.Delete_management(PROJ_Status_Updates__Table_)
+            arcpy.Delete_management(DDEV_PROJ_Status_Updates__Table_)
 
         print "Creating Status Update Table..."        
-        # Process: Create Table (2)
-        arcpy.CreateTable_management(sdeDDev, "PROJ_StatusUpdates", Status_Update_WebFC, "")
+# Process: Create Table (2)
+        arcpy.CreateTable_management(sdeDDev, "PROJ_StatusUpdates", DDEV_Status_Update_WebFC, "")
 
         print "Adding Fields..."
-        # Process: Add Field (77)
-        arcpy.AddField_management(PROJ_Status_Updates__Table_, "VRLID", "TEXT", "", "", "", "", "NULLABLE", "NON_REQUIRED", "")
+# Process: Add Field (77)
+        arcpy.AddField_management(DDEV_PROJ_Status_Updates__Table_, "VRLID", "TEXT", "", "", "", "", "NULLABLE", "NON_REQUIRED", "")
 
-        # Process: Add Field (78)
-        arcpy.AddField_management(PROJ_Status_Updates__Table_, "FromMP", "DOUBLE", "", "", "", "", "NULLABLE", "NON_REQUIRED", "")
+# Process: Add Field (78)
+        arcpy.AddField_management(DDEV_PROJ_Status_Updates__Table_, "FromMP", "DOUBLE", "", "", "", "", "NULLABLE", "NON_REQUIRED", "")
 
-        # Process: Add Field (79)
-        arcpy.AddField_management(PROJ_Status_Updates__Table_, "ToMP", "DOUBLE", "", "", "", "", "NULLABLE", "NON_REQUIRED", "")
+# Process: Add Field (79)
+        arcpy.AddField_management(DDEV_PROJ_Status_Updates__Table_, "ToMP", "DOUBLE", "", "", "", "", "NULLABLE", "NON_REQUIRED", "")
         
     except Exception, msg:
         exc_type, exc_obj, exc_tb = sys.exc_info()
@@ -267,14 +264,60 @@ def createAndMergeProjectsBackupTable():
         fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]      
         print(fname, exc_tb.tb_lineno, msg)
 
+def enableVersionTracking():
+    try:
+        global DDEV_Add_Project_WebFC
+        global RAIL_Add_Project_WebFC
+        global DDEV_Status_Update_WebFC
+        
+        if arcpy.Exists(DDEV_Add_Project_WebFC):
+            print "Existing Project table found.  Deleting existing table..."
+            arcpy.Delete_management(DDEV_Add_Project_WebFC)
+            
+        print "Copying production Project table to development..."
+        arcpy.FeatureClassToGeodatabase_conversion(RAIL_Add_Project_WebFC,sdeDDev)
+
+        print "Enabling editor tracking..."        
+# Process: Enable Editor Tracking
+        arcpy.EnableEditorTracking_management(DDEV_Projects_Table, "created_user", "created_date", "last_edited_user", "last_edited_date", "", "UTC")
+
+# Process: Enable Editor Tracking (2)
+        arcpy.EnableEditorTracking_management(DDEV_Status_Update_WebFC, "created_user", "created_date", "last_edited_user", "last_edited_date", "", "UTC")
+
+# Process: Enable Editor Tracking (3)
+        arcpy.EnableEditorTracking_management(DDEV_Add_Project_WebFC, "created_user", "created_date", "last_edited_user", "last_edited_date", "", "UTC")
+
+# Process: Enable Editor Tracking (4)
+        arcpy.EnableEditorTracking_management(DDEV_PROJ_Status_Updates__Table_, "created_user", "created_date", "last_edited_user", "last_edited_date", "", "UTC")
+
+        print "Registering key tables as versioned for editor tracking..."
+# Process: Register As Versioned
+        arcpy.RegisterAsVersioned_management(DDEV_Projects_Table, "NO_EDITS_TO_BASE")
+
+# Process: Register As Versioned (2)
+        arcpy.RegisterAsVersioned_management(DDEV_Status_Update_WebFC, "NO_EDITS_TO_BASE")
+
+# Process: Register As Versioned (3)
+        arcpy.RegisterAsVersioned_management(DDEV_PROJ_Status_Updates__Table_, "NO_EDITS_TO_BASE")
+
+# Process: Register As Versioned (4)
+        arcpy.RegisterAsVersioned_management(DDEV_Add_Project_WebFC, "NO_EDITS_TO_BASE")
+        
+    except Exception, msg:
+        exc_type, exc_obj, exc_tb = sys.exc_info()
+        fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]      
+        print(fname, exc_tb.tb_lineno, msg)
+
+
 def main():
     try:
         global startTime
         print "Begin main subroutine..."
 
         #createDomains()
-        #createStatusUpdateTable()
+        createStatusUpdateTable()
         createAndMergeProjectsBackupTable()
+        enableVersionTracking()
 
 #Calculating processing time, completing process
         endTime = datetime.datetime.now()
