@@ -19,6 +19,8 @@ import time
 
 print "beginning script..."
 
+startTime = datetime.datetime.now()
+
 with open("C://Connections.txt","r") as Conn:
     lines = Conn.readlines()
 
@@ -66,6 +68,14 @@ for line in lines:
         elif "PROJ_Status_Updates__Table_" in line:
             PROJ_Status_Updates__Table_ = sdeDDev + "/" + line[line.index("= \"")+3:len(line)-2]
             print PROJ_Status_Updates__Table_
+        elif "dev_gdb_Projects_Backup" in line:
+            dev_gdb_Projects_Backup = line[line.index("= \"")+3:len(line)-2]
+            print dev_gdb_Projects_Backup
+        elif "GDB_Projects_Table" in line:
+            DDEV_Projects_Table = sdeDDev + "/" + line[line.index("= \"")+3:len(line)-2]
+            RAIL_Projects_Table = sdeRail + "/" + line[line.index("= \"")+3:len(line)-2]
+            print DDEV_Projects_Table
+            print RAIL_Projects_Table
         else:
             pass
 
@@ -172,9 +182,11 @@ def createDomains():
 
 def createStatusUpdateTable():
     try:
-
+        global PROJ_Status_Updates__Table_
+        global Status_Update_WebFC
+        
         if arcpy.Exists(PROJ_Status_Updates__Table_):
-            print "Existing table found.  Deleting existing table..."
+            print "Existing Project Status Update table found.  Deleting existing table..."
             arcpy.Delete_management(PROJ_Status_Updates__Table_)
 
         print "Creating Status Update Table..."        
@@ -196,12 +208,73 @@ def createStatusUpdateTable():
         fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]      
         print(fname, exc_tb.tb_lineno, msg)
 
+def createAndMergeProjectsBackupTable():
+    try:
+        global DDEV_Projects_Table
+        global RAIL_Projects_Table
+        global sdeDDev
+        global dev_gdb_Projects_Backup
+        
+        if arcpy.Exists(DDEV_Projects_Table):
+            print "Existing Project table found.  Deleting existing table..."
+            arcpy.Delete_management(DDEV_Projects_Table)
+            
+        print "Copying production Project table to development..."
+        arcpy.TableToGeodatabase_conversion(RAIL_Projects_Table,sdeDDev)
+            
+        fieldMapping = (dev_gdb_Projects_Backup + "ProjectName \"Project Name\" true true false 100 Text 0 0 ,First,#," + 
+                        dev_gdb_Projects_Backup + ",ProjectName,-1,-1;ProjectType \"ProjectType\" true true false 255 Text 0 0 ,First,#," + 
+                        dev_gdb_Projects_Backup + ",ProjectType,-1,-1;PIN \"PIN Number\" true true false 7 Text 0 0 ,First,#," + 
+                        dev_gdb_Projects_Backup + ",PIN,-1,-1;VTransPM \"VTrans Project Manager\" true true false 255 Text 0 0 ,First,#," + 
+                        dev_gdb_Projects_Backup + ",VTransPM,-1,-1;ConsultantPM \"Consultant Project Manager\" true true false 255 Text 0 0 ,First,#," + 
+                        dev_gdb_Projects_Backup + ",ConsultantPM,-1,-1;Consultant \"Consultant\" true true false 255 Text 0 0 ,First,#," + 
+                        dev_gdb_Projects_Backup + ",Consultant,-1,-1;ConsultantPMContact \"Consultant PM Contact Info\" true true false 250 Text 0 0 ,First,#," + 
+                        dev_gdb_Projects_Backup + ",ConsultantPMContact,-1,-1;RailLine \"Rail Line\" true true false 255 Text 0 0 ,First,#," + 
+                        dev_gdb_Projects_Backup + ",RailLine,-1,-1;VRLID \"VRLID\" true true false 255 Text 0 0 ,First,#," + 
+                        dev_gdb_Projects_Backup + ",VRLID,-1,-1;LineName \"Line Name\" true true false 255 Text 0 0 ,First,#," + 
+                        dev_gdb_Projects_Backup + ",LineName,-1,-1;Operator \"Operator\" true true false 255 Text 0 0 ,First,#," + 
+                        dev_gdb_Projects_Backup + ",Operator,-1,-1;Division \"Division\" true true false 255 Text 0 0 ,First,#," + 
+                        dev_gdb_Projects_Backup + ",Division,-1,-1;Subdivision \"Subdivision\" true true false 255 Text 0 0 ,First,#," +
+                        dev_gdb_Projects_Backup + ",Subdivision,-1,-1;Branch \"Branch\" true true false 255 Text 0 0 ,First,#," + 
+                        dev_gdb_Projects_Backup + ",Branch,-1,-1;StateOwned \"State Owned\" true true false 255 Text 0 0 ,First,#," + 
+                        dev_gdb_Projects_Backup + ",StateOwned,-1,-1;RailTrail \"Rail Trail\" true true false 255 Text 0 0 ,First,#," + 
+                        dev_gdb_Projects_Backup + ",RailTrail,-1,-1;FromMP \"FromMP\" true true false 8 Double 8 38 ,First,#," + 
+                        dev_gdb_Projects_Backup + ",FromMP,-1,-1;ToMP \"ToMP\" true true false 8 Double 8 38 ,First,#," + 
+                        dev_gdb_Projects_Backup + ",ToMP,-1,-1;AssetType \"Asset Type\" true true false 255 Text 0 0 ,First,#," + 
+                        dev_gdb_Projects_Backup + ",AssetType,-1,-1;AssetID \"AssetID\" true true false 255 Text 0 0 ,First,#," + 
+                        dev_gdb_Projects_Backup + ",AssetID,-1,-1;LocationType \"Location Type\" true true false 255 Text 0 0 ,First,#," + 
+                        dev_gdb_Projects_Backup + ",LocationType,-1,-1;AssetNumber \"Asset Number\" true true false 255 Text 0 0 ,First,#," + 
+                        dev_gdb_Projects_Backup + ",AssetNumber,-1,-1;BasicDescription \"Basic Project Description\" true true false 250 Text 0 0 ,First,#," + 
+                        dev_gdb_Projects_Backup + ",BasicDescription,-1,-1;ProjectDescription \"Full Project Description\" true true false 500 Text 0 0 ,First,#," + 
+                        dev_gdb_Projects_Backup + ",ProjectDescription,-1,-1;LatestConstEst \"Latest Construction Estimate w/ E&C\" true true false 8 Double 8 38 ,First,#," + 
+                        dev_gdb_Projects_Backup + ",LatestConstEst,-1,-1;EnvAllClear \"Environmental All Clear\" true true false 255 Text 0 0 ,First,#," + 
+                        dev_gdb_Projects_Backup + ",EnvAllClear,-1,-1;UtilClear \"Utilities Clearance\" true true false 255 Text 0 0 ,First,#," + 
+                        dev_gdb_Projects_Backup + ",UtilClear,-1,-1;ROWClear \"ROW Clearance\" true true false 255 Text 0 0 ,First,#," + 
+                        dev_gdb_Projects_Backup + ",ROWClear,-1,-1;RRClear \"Railroad Clearance\" true true false 255 Text 0 0 ,First,#," + 
+                        dev_gdb_Projects_Backup + ",RRClear,-1,-1;AdvertiseTarget \"Project Advertisement Target\" true true false 255 Text 0 0 ,First,#," + 
+                        dev_gdb_Projects_Backup + ",AdvertiseTarget,-1,-1;Include \"Include In Reports\" true true false 255 Text 0 0 ,First,#," + 
+                        dev_gdb_Projects_Backup + ",Include,-1,-1;created_user \"created_user\" true true false 255 Text 0 0 ,First,#," + 
+                        dev_gdb_Projects_Backup + ",created_user,-1,-1;created_date \"created_date\" true true false 36 Date 0 0 ,First,#," + 
+                        dev_gdb_Projects_Backup + ",created_date,-1,-1;last_edited_user \"last_edited_user\" true true false 255 Text 0 0 ,First,#," + 
+                        dev_gdb_Projects_Backup + ",last_edited_user,-1,-1;last_edited_date \"last_edited_date\" true true false 36 Date 0 0 ,First,#," + 
+                        dev_gdb_Projects_Backup + ",last_edited_date,-1,-1")
+
+        print "Merging Projects Backup Table into development Projects table..."
+        arcpy.Append_management(dev_gdb_Projects_Backup, DDEV_Projects_Table, "NO_TEST",fieldMapping, "")
+
+    except Exception, msg:
+        exc_type, exc_obj, exc_tb = sys.exc_info()
+        fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]      
+        print(fname, exc_tb.tb_lineno, msg)
+
 def main():
     try:
+        global startTime
         print "Begin main subroutine..."
 
         #createDomains()
-        createStatusUpdateTable()
+        #createStatusUpdateTable()
+        createAndMergeProjectsBackupTable()
 
 #Calculating processing time, completing process
         endTime = datetime.datetime.now()
