@@ -14,6 +14,7 @@ import sys
 import os
 #import smtplib
 import datetime
+import time
 #from email.mime.text import MIMEText
 
 print "beginning script..."
@@ -23,10 +24,10 @@ with open("C://Connections.txt","r") as Conn:
 
 for line in lines:
     if line[0:1]!="#":
-        if "sdeDDev" in line:
+        if "sdeDDev = " in line:
             sdeDDev = line[line.index("= \"")+3:len(line)-2]
             print sdeDDev
-        elif "sdeRail" in line:
+        elif "sdeRail = " in line:
             sdeRail = line[line.index("= \"")+3:len(line)-2]
             print sdeRail
         elif "ConsultantPM_txt" in line:
@@ -57,8 +58,14 @@ for line in lines:
             AllPMs_txt = line[line.index("= \"")+3:len(line)-2]
             print AllPMs_txt
         elif "ProjectDescription_txt" in line:
-            ProjectDescription_txt = line[line.index("= \"")+3:len(line)-1]
+            ProjectDescription_txt = line[line.index("= \"")+3:len(line)-2]
             print ProjectDescription_txt
+        elif "Status_Update_WebFC" in line:
+            Status_Update_WebFC = sdeRail + "/" + line[line.index("= \"")+3:len(line)-2]
+            print Status_Update_WebFC
+        elif "PROJ_Status_Updates__Table_" in line:
+            PROJ_Status_Updates__Table_ = sdeDDev + "/" + line[line.index("= \"")+3:len(line)-2]
+            print PROJ_Status_Updates__Table_
         else:
             pass
 
@@ -163,42 +170,38 @@ def createDomains():
         fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]      
         print(fname, exc_tb.tb_lineno, msg)
 
+def createStatusUpdateTable():
+    try:
+
+        if arcpy.Exists(PROJ_Status_Updates__Table_):
+            print "Existing table found.  Deleting existing table..."
+            arcpy.Delete_management(PROJ_Status_Updates__Table_)
+
+        print "Creating Status Update Table..."        
+        # Process: Create Table (2)
+        arcpy.CreateTable_management(sdeDDev, "PROJ_StatusUpdates", Status_Update_WebFC, "")
+
+        print "Adding Fields..."
+        # Process: Add Field (77)
+        arcpy.AddField_management(PROJ_Status_Updates__Table_, "VRLID", "TEXT", "", "", "", "", "NULLABLE", "NON_REQUIRED", "")
+
+        # Process: Add Field (78)
+        arcpy.AddField_management(PROJ_Status_Updates__Table_, "FromMP", "DOUBLE", "", "", "", "", "NULLABLE", "NON_REQUIRED", "")
+
+        # Process: Add Field (79)
+        arcpy.AddField_management(PROJ_Status_Updates__Table_, "ToMP", "DOUBLE", "", "", "", "", "NULLABLE", "NON_REQUIRED", "")
+        
+    except Exception, msg:
+        exc_type, exc_obj, exc_tb = sys.exc_info()
+        fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]      
+        print(fname, exc_tb.tb_lineno, msg)
+
 def main():
     try:
         print "Begin main subroutine..."
 
-#Initialize variables
-        startTime = datetime.datetime.now()
-##        TownLRS = sdeGen + "/VTrans_Admin.Trans_LRS_Route_twn"
-##        EndToEndLRS = sdeGen + "/VTrans_Admin.Trans_LRS_Route_ete"            
-        
-#adodbapi connection samples
-
-#Retreive data
-##        connSource = adodbapi.connect("Provider=SQLNCLI; Server=AOTGIS;Database=GDB_Rail; Uid=Rail_Admin; Pwd=2011Nov01;")
-##        csrSource = connSource.cursor()
-##        csrSource.execute("SELECT TOP 5 SGN.DOT_Num, SGN.SignType, SGN.OBJECTID, ATT.DATA FROM [GDB_Rail].[RAIL_ADMIN].[INV_CrossingSigns__ATTACH]  ATT INNER JOIN [GDB_Rail].[RAIL_ADMIN].[INV_CrossingSigns]  SGN ON ATT.ATTACHMENTID = SGN.OBJECTID")
-##        lstSource = csrSource.fetchall()
-##        csrSource.close()
-
-#Insert data
-##        strSQL = "INSERT INTO GDB_DDev.dbo.LoadTableRailSpansInspections ("+flds+",Insp_Type,Date_FilledOut,OVERALL_CONDITION,DECK_COND,SUPER_COND,SUB_COND,Gauge,Horiz_Align,InspectBy_300,InspectBy_540,JOIN_ID,SortOrder) "
-##        strSQL += "VALUES("+vals+",\'"+inspType+"\'"+",\'"+dateFilledOut+"\'"+",\'"+overallCond+"\'"+",\'"+deckCond+"\'"+",\'"+superCond+"\'"+",\'"+subCond+"\'"+",\'"+gauge+"\'"+",\'"+horizAlign+"\'"+",\'"+inspBy300+"\'"+",\'"+inspBy540+ "\',\'" + brNum + "s" + spNum + "\'," + brNum + ")"
-##        csrSource.execute(strSQL)
-##        connSource.commit()
-##        csrSource.close()
-##        connSource.close()
-##        del csrSource, connSource
-
-#Execute T-SQL command
-##        strSQL = "TRUNCATE TABLE dbo.LoadTableRailSpansInspections"
-##        csrSource.execute(strSQL)
-##        connSource.commit()
-##        csrSource.close()
-##        connSource.close()
-##        del csrSource, connSource
-
-        createDomains()
+        #createDomains()
+        createStatusUpdateTable()
 
 #Calculating processing time, completing process
         endTime = datetime.datetime.now()
@@ -211,20 +214,7 @@ def main():
         exc_type, exc_obj, exc_tb = sys.exc_info()
         fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]      
         print(fname, exc_tb.tb_lineno, msg)
-        
-#Process error message as email
-##        body = 'The python script BlobExtractor failed on line number ' + str(lineno) +  ' with the following error:  ' + str(msg)
-##        fromaddr = 'rick.scott@state.vt.us'
-##        toaddrs = ['rick.scott@state.vt.us']
-##        content = MIMEText(body)
-##        content['Subject'] = 'Python Script Failure:  BlobExtractor'
-##        content['From'] =  fromaddr
-##        content['To'] =  ", ".join(toaddrs)
-##        server = smtplib.SMTP('relay.state.vt.us')
-##        server.sendmail(fromaddr, toaddrs, content.as_string())
-##        server.quit()
-
-            
+                    
     finally:   
         print "Finally done!"
 
