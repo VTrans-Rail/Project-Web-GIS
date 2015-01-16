@@ -1,5 +1,5 @@
 """
-Rail Projects Post Process- This script adds the VRLID to project status updates.
+Rail Projects Post Process - This script adds the VRLID to project status updates,...and updates relevant domains.
 It is based on a series of scripts exported from Model Builder.
 
 Created/Updated By: Rick Scott
@@ -28,76 +28,80 @@ for line in lines:
     if line[0:1]!="#":
         if "sdeDDev = " in line:
             sdeDDev = line[line.index("= \"")+3:len(line)-2]
-            print sdeDDev
+            #print sdeDDev
         elif "sdeRail = " in line:
             sdeRail = line[line.index("= \"")+3:len(line)-2]
-            print sdeRail
+            #print sdeRail
         elif "ConsultantPM_txt" in line:
             ConsultantPM_txt = line[line.index("= \"")+3:len(line)-2]
-            print ConsultantPM_txt
+            #print ConsultantPM_txt
         elif "VTransPM_txt" in line:
             VTransPM_txt = line[line.index("= \"")+3:len(line)-2]
-            print VTransPM_txt
+            #print VTransPM_txt
         elif "Consultants_txt" in line:
             Consultants_txt = line[line.index("= \"")+3:len(line)-2]
-            print Consultants_txt
+            #print Consultants_txt
         elif "ConsultantsContact_txt" in line:
             ConsultantsContact_txt = line[line.index("= \"")+3:len(line)-2]
-            print ConsultantsContact_txt
+            #print ConsultantsContact_txt
         elif "ProjectType_txt" in line:
             ProjectType_txt = line[line.index("= \"")+3:len(line)-2]
-            print ProjectType_txt
+            #print ProjectType_txt
         elif "LocationType_txt" in line:
             LocationType_txt = line[line.index("= \"")+3:len(line)-2]
-            print LocationType_txt            
+            #print LocationType_txt            
         elif "VRLID_join_csv" in line:
             VRLID_join_csv = line[line.index("= \"")+3:len(line)-2]
-            print VRLID_join_csv
+            #print VRLID_join_csv
         elif "AssetType_txt" in line:
             AssetType_txt = line[line.index("= \"")+3:len(line)-2]
-            print AssetType_txt
+            #print AssetType_txt
         elif "AllPMs_txt" in line:
             AllPMs_txt = line[line.index("= \"")+3:len(line)-2]
-            print AllPMs_txt
+            #print AllPMs_txt
         elif "ProjectDescription_txt" in line:
             ProjectDescription_txt = line[line.index("= \"")+3:len(line)-2]
-            print ProjectDescription_txt
+            #print ProjectDescription_txt
         elif "Status_Update_WebFC" in line:
             DDEV_Status_Update_WebFC = sdeDDev + "/" + line[line.index("= \"")+3:len(line)-2]
             RAIL_Status_Update_WebFC = sdeRail + "/" + line[line.index("= \"")+3:len(line)-2]
-            print DDEV_Status_Update_WebFC
-            print RAIL_Status_Update_WebFC
+            #print DDEV_Status_Update_WebFC
+            #print RAIL_Status_Update_WebFC
         elif "PROJ_Status_Updates__Table_" in line:
             DDEV_PROJ_Status_Updates__Table_ = sdeDDev + "/" + line[line.index("= \"")+3:len(line)-2]
-            print DDEV_PROJ_Status_Updates__Table_
+            #print DDEV_PROJ_Status_Updates__Table_
         elif "dev_gdb_Projects_Backup" in line:
             dev_gdb_Projects_Backup = line[line.index("= \"")+3:len(line)-2]
-            print dev_gdb_Projects_Backup
+            #print dev_gdb_Projects_Backup
         elif "GDB_Projects_Table" in line:
             DDEV_Projects_Table = sdeDDev + "/" + line[line.index("= \"")+3:len(line)-2]
             RAIL_Projects_Table = sdeRail + "/" + line[line.index("= \"")+3:len(line)-2]
-            print DDEV_Projects_Table
-            print RAIL_Projects_Table
+            #print DDEV_Projects_Table
+            #print RAIL_Projects_Table
         elif "Add_Project_WebFC" in line:
             DDEV_Add_Project_WebFC = sdeDDev + "/" + line[line.index("= \"")+3:len(line)-2]
             RAIL_Add_Project_WebFC = sdeRail + "/" + line[line.index("= \"")+3:len(line)-2]
-            print DDEV_Add_Project_WebFC
-            print RAIL_Add_Project_WebFC            
+            #print DDEV_Add_Project_WebFC
+            #print RAIL_Add_Project_WebFC            
         elif "PROJ_Projects_View1" in line:
             DDEV_PROJ_Projects_View1 = sdeDDev + "/" + line[line.index("= \"")+3:len(line)-2]
-            print DDEV_PROJ_Projects_View1
+            #print DDEV_PROJ_Projects_View1
         elif "PROJ_Projects_View2" in line:
             DDEV_PROJ_Projects_View2 = sdeDDev + "/" + line[line.index("= \"")+3:len(line)-2]
-            print DDEV_PROJ_Projects_View2
+            #print DDEV_PROJ_Projects_View2
         elif "AssetID" in line:
             RAIL_AssetID = sdeRail + "/" + line[line.index("= \"")+3:len(line)-2]
-            print RAIL_AssetID
+            #print RAIL_AssetID
         elif "PROJ_Projects_View3" in line:
             DDEV_PROJ_Projects_View3 = sdeDDev + "/" + line[line.index("= \"")+3:len(line)-2]
-            print DDEV_PROJ_Projects_View3
+            #print DDEV_PROJ_Projects_View3
+        elif "RailConn" in line:
+            RailConn = line[line.index("= \"")+3:len(line)-2]
+            #print RailConn        
         else:
             pass
 
+        domainAssociations = []
 
 def CalcVRLIDs():
     try:
@@ -227,13 +231,130 @@ def CalcVRLIDs():
         fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]      
         print(fname, exc_tb.tb_lineno, msg)
 
+def disconnectDomains(obj):
+    try:
+        global domainAssociations
+#Remove domain from their associated fields.  Domains association with fields prevent those domains from being deleted.
+        fields = arcpy.ListFields(obj)
+        for field in fields:
+            #desc = arcpy.Describe(field)
+            if len(field.domain)>0:
+                domainSet = []
+                domainSet.append(obj)
+                domainSet.append(field.name)
+                domainSet.append(field.domain)
+                domainAssociations.append(domainSet)
+                print "Attempting to remove domain [" + field.domain + "] from field [" + field.name + "] in object [" + obj + "]..."
+                arcpy.RemoveDomainFromField_management(obj, field.name)
+
+    except Exception, msg:
+        exc_type, exc_obj, exc_tb = sys.exc_info()
+        fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]      
+        print(fname, exc_tb.tb_lineno, msg)
+
+def updateDomains():
+    try:
+        print "Scoping globals..."
+        #global sdeRail
+        global sdeDDev
+        global ConsultantPM_txt
+        global VTransPM_txt
+        global Consultants_txt
+        global ConsultantsContact_txt
+        global ProjectType_txt
+        global LocationType_txt
+        global VRLID_join_csv
+        global AssetType_txt
+        global AllPMs_txt
+        global ProjectDescription_txt
+
+#Disassociating domains from fields
+        print "Disconnecting domains from fields..."
+        disconnectDomains(sdeDDev + "/PROJ_AddProject_WebFC")
+        disconnectDomains(sdeDDev + "/PROJ_Projects")
+        disconnectDomains(sdeDDev + "/PROJ_StatusUpdate_WebFC")
+        disconnectDomains(sdeDDev + "/PROJ_StatusUpdates")
+
+#Delete domains
+        print "Deleting domains..."
+        domains = arcpy.da.ListDomains(sdeDDev)
+        for domain in domains:
+            if "ConsultantPM" in domain.name:
+                arcpy.DeleteDomain_management(sdeDDev, domain.name)
+            elif "VTransPM" in domain.name:
+                arcpy.DeleteDomain_management(sdeDDev, domain.name)
+            elif "Consultants" in domain.name:
+                arcpy.DeleteDomain_management(sdeDDev, domain.name)
+            elif "ConsultantContact" in domain.name:
+                arcpy.DeleteDomain_management(sdeDDev, domain.name)
+            elif "RailLine" in domain.name:
+                arcpy.DeleteDomain_management(sdeDDev, domain.name)
+            elif "AssetType" in domain.name:
+                arcpy.DeleteDomain_management(sdeDDev, domain.name)
+            elif "LocType" in domain.name:
+                arcpy.DeleteDomain_management(sdeDDev, domain.name)
+            elif "ProjectType" in domain.name:
+                arcpy.DeleteDomain_management(sdeDDev, domain.name)
+            elif "AllPMs" in domain.name:
+                arcpy.DeleteDomain_management(sdeDDev, domain.name)
+            elif "ProjDescript" in domain.name:
+                arcpy.DeleteDomain_management(sdeDDev, domain.name)
+            elif "ProjectName" in domain.name:
+                arcpy.DeleteDomain_management(sdeDDev, domain.name)
+
+        print "Recreating domains..."
+        arcpy.TableToDomain_management(ConsultantPM_txt, "CODE", "DESCRIPTION", sdeDDev, "ConsultantPM", "Consultant Project Managers", "REPLACE")
+        arcpy.TableToDomain_management(VTransPM_txt, "CODE", "DESCRIPTION", sdeDDev, "VTransPM", "VTrans Project Managers", "REPLACE")
+        arcpy.TableToDomain_management(Consultants_txt, "CODE", "DESCRIPTION", sdeDDev, "Consultants", "Design Consultants", "REPLACE")
+        arcpy.TableToDomain_management(ConsultantsContact_txt, "CODE", "DESCRIPTION", sdeDDev, "ConsultantContact", "Consultant Contact Info", "REPLACE")
+        arcpy.TableToDomain_management(VRLID_join_csv, "RailLineCode", "RailLineDescription", sdeDDev, "RailLine", "Rail Line", "REPLACE")
+        arcpy.TableToDomain_management(AssetType_txt, "CODE", "DESCRIPTION", sdeDDev, "AssetType", "Asset Type", "REPLACE")
+        arcpy.TableToDomain_management(LocationType_txt, "CODE", "DESCRIPTION", sdeDDev, "LocType", "Project Location Type (Point, Line, Multi)", "REPLACE")
+        arcpy.TableToDomain_management(ProjectType_txt, "CODE", "DESCRIPTION", sdeDDev, "ProjectType", "Project Type", "REPLACE")
+        arcpy.TableToDomain_management(AllPMs_txt, "CODE", "DESCRIPTION", sdeDDev, "AllPMs", "All Project Managers", "REPLACE")
+        arcpy.TableToDomain_management(ProjectDescription_txt, "CODE", "DESCRIPTION", sdeDDev, "ProjDescript", "Basic Project Description", "REPLACE")
+
+        connSource = adodbapi.connect(RailConn)
+        csrSource = connSource.cursor()
+        csrSource.execute("SELECT DISTINCT ProjectName FROM [GDB_DDev].[DDev_ADMIN].[PROJ_Projects] WHERE ProjectName IS NOT NULL UNION SELECT DISTINCT ProjectName FROM [GDB_DDev].[DDev_ADMIN].[PROJ_AddProject_WebFC] WHERE ProjectName IS NOT NULL")
+        lstSource = csrSource.fetchall()
+        csrSource.close()
+
+        arcpy.CreateDomain_management(sdeDDev, "ProjectName", "VTrans Project Name", "TEXT", "CODED")
+        
+        for rowSource in lstSource:
+             arcpy.AddCodedValueToDomain_management(sdeDDev, "ProjectName", rowSource[0], rowSource[0])
+                
+        print "Sorting coded value domains..."
+        arcpy.SortCodedValueDomain_management(sdeDDev, "VTransPM", "CODE", "ASCENDING")
+        arcpy.SortCodedValueDomain_management(sdeDDev, "Consultants", "CODE", "ASCENDING")
+        arcpy.SortCodedValueDomain_management(sdeDDev, "ConsultantContact", "CODE", "ASCENDING")
+        arcpy.SortCodedValueDomain_management(sdeDDev, "ProjectType", "CODE", "ASCENDING")
+        arcpy.SortCodedValueDomain_management(sdeDDev, "RailLine", "CODE", "ASCENDING")
+        arcpy.SortCodedValueDomain_management(sdeDDev, "AssetType", "CODE", "ASCENDING")
+        arcpy.SortCodedValueDomain_management(sdeDDev, "AllPMs", "CODE", "ASCENDING")
+        arcpy.SortCodedValueDomain_management(sdeDDev, "ProjDescript", "CODE", "ASCENDING")
+        arcpy.SortCodedValueDomain_management(sdeDDev, "ConsultantPM", "CODE", "ASCENDING")
+        arcpy.SortCodedValueDomain_management(sdeDDev, "LocType", "CODE", "ASCENDING")
+        arcpy.SortCodedValueDomain_management(sdeDDev, "ProjectName", "CODE", "ASCENDING")
+
+        print "Reassociating fields with their domains..."
+        for dom in domainAssociations:
+            arcpy.AssignDomainToField_management(dom[0], dom[1], dom[2])
+
+    except Exception, msg:
+        exc_type, exc_obj, exc_tb = sys.exc_info()
+        fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]      
+        print(fname, exc_tb.tb_lineno, msg)
+
 def main():
     try:
         global startTime
         print "Begin main subroutine..."
 
         CalcVRLIDs()
-
+        updateDomains()
+        
 #Calculating processing time, completing process
         endTime = datetime.datetime.now()
         execTime = endTime - startTime
