@@ -22,10 +22,10 @@ _Creation, data backup, merging, etc_
 6_AddProject Append Calc VRLID  
 7_AddProject Join Calculate DynSeg
 
-8_StatusUpdate_Append
-7_AddProject Join Calculate DynSeg
-4_Status Table Relate
-
+8_StatusUpdate_Append  
+7_AddProject Join Calculate DynSeg  
+4_Status Table Relate  
+  
 *New: Update domains based on changes*
 
 
