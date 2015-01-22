@@ -68,8 +68,8 @@ for line in lines:
             #print DDEV_Status_Update_WebFC
             #print RAIL_Status_Update_WebFC
         elif "PROJ_Status_Updates__Table_" in line:
-            DDEV_PROJ_Status_Updates__Table_ = sdeDDev + "/" + line[line.index("= \"")+3:len(line)-2]
-            #print DDEV_PROJ_Status_Updates__Table_
+            DDEV_PROJ_Status_Updates_Table = sdeDDev + "/" + line[line.index("= \"")+3:len(line)-2]
+            #print DDEV_PROJ_Status_Updates_Table
         elif "dev_gdb_Projects_Backup" in line:
             dev_gdb_Projects_Backup = line[line.index("= \"")+3:len(line)-2]
             #print dev_gdb_Projects_Backup
@@ -98,6 +98,9 @@ for line in lines:
         elif "PROJ_Projects_View5" in line:
             DDEV_PROJ_Projects_View5 = sdeDDev + "/" + line[line.index("= \"")+3:len(line)-2]
             #print DDEV_PROJ_Projects_View5
+        elif "PROJ_Projects_Status_Updates_View1" in line:
+            DDEV_PROJ_Projects_Status_Updates_View1 = sdeDDev + "/" + line[line.index("= \"")+3:len(line)-2]
+            #print DDEV_PROJ_Projects_View1            
         elif "AssetID" in line:
             RAIL_AssetID = sdeRail + "/" + line[line.index("= \"")+3:len(line)-2]
             #print RAIL_AssetID
@@ -471,7 +474,7 @@ def dynSegAddProjects():
         print "dynSegAddProjects:  Creating third table view for generating project line data..."        
         arcpy.MakeTableView_management(DDEV_Projects_Table, DDEV_PROJ_Projects_View5, "ToMP IS NOT NULL", "", fieldInfo)
 
-        print "There are potentially " + str(arcpy.GetCount_management(DDEV_PROJ_Projects_View5)) + " polylines in the data..."
+        print "dynSegAddProjects:  There are potentially " + str(arcpy.GetCount_management(DDEV_PROJ_Projects_View5)) + " polylines in the data..."
 
 # Process: Dynseg points
         print "dynSegAddProjects:  DynSegging third table view to in-memory line layer..."
@@ -514,7 +517,7 @@ def dynSegAddProjects():
                         "last_edited_user \"last_edited_user\" false true false 255 Text 0 0 ,First,#,Line Events,last_edited_user,-1,-1;" +
                         "last_edited_date \"last_edited_date\" false true false 36 Date 0 0 ,First,#,Line Events,last_edited_date,-1,-1")
 
-        print str(arcpy.GetCount_management(lyrLines)) + " polylines  were created..."
+        print "dynSegAddProjects:  " + str(arcpy.GetCount_management(lyrLines)) + " polylines  were created..."
 
 # Process: Project lines to FC
         if arcpy.Exists(sdeDDev + "/PROJ_Lines"):
@@ -541,6 +544,45 @@ def dynSegAddProjects():
         exc_type, exc_obj, exc_tb = sys.exc_info()
         fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]      
         print(fname, exc_tb.tb_lineno, msg)
+
+def statusUpdateAppend():
+    try:
+        global DDEV_Status_Update_WebFC
+        global DDEV_PROJ_Status_Updates_Table
+        global DDEV_PROJ_Projects_Status_Updates_View1
+
+        fieldInfo = ("OBJECTID OBJECTID VISIBLE NONE;" + 
+                     "Shape Shape VISIBLE NONE;" +
+                     "ProjectName ProjectName VISIBLE NONE;" +
+                     "Status Status VISIBLE NONE;" +
+                     "Action Action VISIBLE NONE;" +
+                     "LatestConstEst LatestConstEst VISIBLE NONE;" +
+                     "EnvAllClear EnvAllClear VISIBLE NONE;" +
+                     "UtilClear UtilClear VISIBLE NONE;" +
+                     "ROWClear ROWClear VISIBLE NONE;" +
+                     "RRClear RRClear VISIBLE NONE;" +
+                     "AdvertiseTarget AdvertiseTarget VISIBLE NONE;" +
+                     "ProjectManager ProjectManager VISIBLE NONE;" +
+                     "created_user created_user VISIBLE NONE;" +
+                     "created_date created_date VISIBLE NONE;" +
+                     "last_edited_user last_edited_user VISIBLE NONE;" +
+                     "last_edited_date last_edited_date VISIBLE NONE")
+
+        # Process: Status update web FC table view
+        print "statusUpdateAppend:  Creating table view for appending new project status data to master..."        
+        arcpy.MakeTableView_management(DDEV_Status_Update_WebFC, DDEV_PROJ_Projects_Status_Updates_View1, "", "", fieldInfo)
+
+        print "statusUpdateAppend: There are " + str(arcpy.GetCount_management(DDEV_PROJ_Projects_Status_Updates_View1)) + " status updates available to append..."
+
+        # Process: Append status web FC to status table
+        print "statusUpdateAppend:  Appending new project status data to master..."
+        arcpy.Append_management(DDEV_PROJ_Projects_Status_Updates_View1, DDEV_PROJ_Status_Updates_Table, "NO_TEST")
+        
+    except Exception, msg:
+        exc_type, exc_obj, exc_tb = sys.exc_info()
+        fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]      
+        print(fname, exc_tb.tb_lineno, msg)
+
 
 def disconnectDomains(obj):
     try:
@@ -665,6 +707,7 @@ def main():
 
         CalcVRLIDs()
         dynSegAddProjects()
+        statusUpdateAppend()
         #updateDomains()
         
 #Calculating processing time, completing process
