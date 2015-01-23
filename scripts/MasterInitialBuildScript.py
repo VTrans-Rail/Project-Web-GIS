@@ -1,20 +1,6 @@
 """
 Rail Projects Initial Build - This script initializes the system for processing status updates created by consultant/contractors in order to create a history.
-It is based on a series of scripts exported from Model Builder.  Currently, it is configured to set up a dev environment for rail projects post-processing.
-The Main subroutine begins with some housekeeping: Deleting existing project status updates feature class, add project feature class, and project table,
-and copying them over from Rail's production environment, minus any associated domains; Deleting point and line feature classes for projects and project status updates.
-Part of the reason for the housekeeping is to break "locks" caused by existing domains.  Then it runs through four subroutines:
-
-createDomains() - Removes any field associations for existng domains, deletes existing domains, compress the dev GDB to clear out the domains completely,
-recreates domains, and then sorts them;
-createStatusUpdateTable() - Deletes any existing project status table, creates a new table from the project status updates feature class that was copied from production,
-and adds LRS fields;
-createAndMergeProjectsBackupTable() - Appends older records from a backup project table in a file GDB to the dev environment;
-enableVersionTracking() - Enables editor tracking and registers as versioned for editor tracking the following objects: the project table, the project status updates table,
-the add projects feature class, and the project status updates feature class.
-
-The createDomains subroutine call a disconnectDomains subroutine to disassociate fields from domains.  This disassociation to occur discreetly, without having errors effect
-disassociations for all objects.
+It is based on a series of scripts exported from Model Builder.
 
 Created/Updated By: Rick Scott
 Create Date: 12/11/2014
@@ -42,7 +28,7 @@ for line in lines:
     if line[0:1]!="#":
         if "sdeDDev = " in line:
             sdeDDev = line[line.index("= \"")+3:len(line)-2]
-            #print sdeDDev
+            #print sdeDDev            
         elif "sdeRail = " in line:
             sdeRail = line[line.index("= \"")+3:len(line)-2]
             #print sdeRail
@@ -82,8 +68,8 @@ for line in lines:
             #print DDEV_Status_Update_WebFC
             #print RAIL_Status_Update_WebFC
         elif "PROJ_Status_Updates__Table_" in line:
-            DDEV_PROJ_Status_Updates_Table = sdeDDev + "/" + line[line.index("= \"")+3:len(line)-2]
-            #print DDEV_PROJ_Status_Updates_Table
+            DDEV_PROJ_Status_Updates__Table_ = sdeDDev + "/" + line[line.index("= \"")+3:len(line)-2]
+            #print DDEV_PROJ_Status_Updates__Table_
         elif "dev_gdb_Projects_Backup" in line:
             dev_gdb_Projects_Backup = line[line.index("= \"")+3:len(line)-2]
             #print dev_gdb_Projects_Backup
@@ -96,34 +82,10 @@ for line in lines:
             DDEV_Add_Project_WebFC = sdeDDev + "/" + line[line.index("= \"")+3:len(line)-2]
             RAIL_Add_Project_WebFC = sdeRail + "/" + line[line.index("= \"")+3:len(line)-2]
             #print DDEV_Add_Project_WebFC
-            #print RAIL_Add_Project_WebFC                                   
-        elif "AssetID" in line:
-            RAIL_AssetID = sdeRail + "/" + line[line.index("= \"")+3:len(line)-2]
-            #print RAIL_AssetID
+            #print RAIL_Add_Project_WebFC
         elif "RailConn" in line:
-            RailConn = line[line.index("= \"")+3:len(line)-2]
-            #print RailConn
-        elif "Rail_LRS" in line:
-            Rail_LRS = sdeRail + "/" + line[line.index("= \"")+3:len(line)-2]
-            #print RAIL_AssetID
-        elif "Project_Points_FC" in line:
-            DDEV_Project_Points_FC = sdeDDev + "/" + line[line.index("= \"")+3:len(line)-2]
-            #print Project_Points_FC
-        elif "Project_Lines_FC" in line:
-            DDEV_Project_Lines_FC = sdeDDev + "/" + line[line.index("= \"")+3:len(line)-2]
-            #print DDEV_Project_Lines_FC
-        elif "Project_StatusPoints_FC" in line:
-            DDEV_Project_StatusPoints_FC = sdeDDev + "/" + line[line.index("= \"")+3:len(line)-2]
-            #print DDEV_Project_StatusPoints_FC
-        elif "Project_StatusLines_FC" in line:
-            DDEV_Project_StatusLines_FC = sdeDDev + "/" + line[line.index("= \"")+3:len(line)-2]
-            #print DDEV_Project_StatusLines_FC            
-        elif "PROJ_Points_PROJ_StatusUpdates_REL" in line:
-            DDEV_PROJ_Points_PROJ_StatusUpdates_REL = sdeDDev + "/" + line[line.index("= \"")+3:len(line)-2]
-            #print DDEV_PROJ_Points_PROJ_StatusUpdates_REL            
-        elif "PROJ_Lines_PROJ_StatusUpdates_REL" in line:
-            DDEV_PROJ_Lines_PROJ_StatusUpdates_REL = sdeDDev + "/" + line[line.index("= \"")+3:len(line)-1]
-            #print DDEV_PROJ_Lines_PROJ_StatusUpdates_REL 
+                    RailConn = line[line.index("= \"")+3:len(line)-2]
+                    #print RailConn
         else:
             pass
 
@@ -270,12 +232,12 @@ def createDomains():
 
 def createStatusUpdateTable():
     try:
-        global DDEV_PROJ_Status_Updates_Table
+        global DDEV_PROJ_Status_Updates__Table_
         global DDEV_Status_Update_WebFC            
         
-        if arcpy.Exists(DDEV_PROJ_Status_Updates_Table):
+        if arcpy.Exists(DDEV_PROJ_Status_Updates__Table_):
             print "Existing Project Status Update table found.  Deleting existing table..."
-            arcpy.Delete_management(DDEV_PROJ_Status_Updates_Table)
+            arcpy.Delete_management(DDEV_PROJ_Status_Updates__Table_)
 
         print "Creating Status Update Table..."        
 # Process: Create Table (2)
@@ -283,13 +245,13 @@ def createStatusUpdateTable():
 
         print "Adding Fields..."
 # Process: Add Field (77)
-        arcpy.AddField_management(DDEV_PROJ_Status_Updates_Table, "VRLID", "TEXT", "", "", "", "", "NULLABLE", "NON_REQUIRED", "")
+        arcpy.AddField_management(DDEV_PROJ_Status_Updates__Table_, "VRLID", "TEXT", "", "", "", "", "NULLABLE", "NON_REQUIRED", "")
 
 # Process: Add Field (78)
-        arcpy.AddField_management(DDEV_PROJ_Status_Updates_Table, "FromMP", "DOUBLE", "", "", "", "", "NULLABLE", "NON_REQUIRED", "")
+        arcpy.AddField_management(DDEV_PROJ_Status_Updates__Table_, "FromMP", "DOUBLE", "", "", "", "", "NULLABLE", "NON_REQUIRED", "")
 
 # Process: Add Field (79)
-        arcpy.AddField_management(DDEV_PROJ_Status_Updates_Table, "ToMP", "DOUBLE", "", "", "", "", "NULLABLE", "NON_REQUIRED", "")
+        arcpy.AddField_management(DDEV_PROJ_Status_Updates__Table_, "ToMP", "DOUBLE", "", "", "", "", "NULLABLE", "NON_REQUIRED", "")
         
     except Exception, msg:
         exc_type, exc_obj, exc_tb = sys.exc_info()
@@ -350,19 +312,17 @@ def enableVersionTracking():
     try:
         global DDEV_Add_Project_WebFC
         global DDEV_Status_Update_WebFC
-        global DDEV_Projects_Table
-        global DDEV_PROJ_Status_Updates_Table
 
         print "Enabling editor tracking..."
         arcpy.EnableEditorTracking_management(DDEV_Projects_Table, "created_user", "created_date", "last_edited_user", "last_edited_date", "", "UTC")
         arcpy.EnableEditorTracking_management(DDEV_Status_Update_WebFC, "created_user", "created_date", "last_edited_user", "last_edited_date", "", "UTC")
         arcpy.EnableEditorTracking_management(DDEV_Add_Project_WebFC, "created_user", "created_date", "last_edited_user", "last_edited_date", "", "UTC")
-        arcpy.EnableEditorTracking_management(DDEV_PROJ_Status_Updates_Table, "created_user", "created_date", "last_edited_user", "last_edited_date", "", "UTC")
+        arcpy.EnableEditorTracking_management(DDEV_PROJ_Status_Updates__Table_, "created_user", "created_date", "last_edited_user", "last_edited_date", "", "UTC")
 
         print "Registering key tables as versioned for editor tracking..."
         arcpy.RegisterAsVersioned_management(DDEV_Projects_Table, "NO_EDITS_TO_BASE")
         arcpy.RegisterAsVersioned_management(DDEV_Status_Update_WebFC, "NO_EDITS_TO_BASE")
-        arcpy.RegisterAsVersioned_management(DDEV_PROJ_Status_Updates_Table, "NO_EDITS_TO_BASE")
+        arcpy.RegisterAsVersioned_management(DDEV_PROJ_Status_Updates__Table_, "NO_EDITS_TO_BASE")
         arcpy.RegisterAsVersioned_management(DDEV_Add_Project_WebFC, "NO_EDITS_TO_BASE")
         
     except Exception, msg:
@@ -379,7 +339,7 @@ def main():
         global domainAssociations
         global sdeRail
         global sdeDDev
-        global DDEV_Status_Update_WebFC
+        global RAIL_Status_Update_WebFC
         global RAIL_Status_Update_WebFC
         global DDEV_Projects_Table
         global RAIL_Projects_Table
@@ -408,23 +368,6 @@ def main():
         #print "Copying production Project table to development..."
         arcpy.env.transferDomains = False
         arcpy.FeatureClassToGeodatabase_conversion(RAIL_Add_Project_WebFC,sdeDDev)
-
-        if arcpy.Exists(DDEV_Project_Points_FC):
-            #print "Existing Project Points feature class found.  Deleting existing feature class..."
-            arcpy.Delete_management(DDEV_Project_Points_FC)
-
-        if arcpy.Exists(DDEV_Project_Lines_FC):
-            #print "Existing Project Lines feature class found.  Deleting existing feature class..."
-            arcpy.Delete_management(DDEV_Project_Lines_FC)
-
-        if arcpy.Exists(DDEV_Project_StatusPoints_FC):
-            #print "Existing Project Points feature class found.  Deleting existing feature class..."
-            arcpy.Delete_management(DDEV_Project_StatusPoints_FC)
-
-        if arcpy.Exists(DDEV_Project_StatusLines_FC):
-            #print "Existing Project Lines feature class found.  Deleting existing feature class..."
-            arcpy.Delete_management(DDEV_Project_StatusLines_FC)
-
 
         createDomains()
         createStatusUpdateTable()
