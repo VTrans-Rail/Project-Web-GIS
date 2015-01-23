@@ -98,9 +98,21 @@ for line in lines:
         elif "PROJ_Projects_View5" in line:
             DDEV_PROJ_Projects_View5 = sdeDDev + "/" + line[line.index("= \"")+3:len(line)-2]
             #print DDEV_PROJ_Projects_View5
+        elif "PROJ_Projects_View6" in line:
+            DDEV_PROJ_Projects_View6 = sdeDDev + "/" + line[line.index("= \"")+3:len(line)-2]
+            #print DDEV_PROJ_Projects_View6            
         elif "PROJ_Projects_Status_Updates_View1" in line:
             DDEV_PROJ_Projects_Status_Updates_View1 = sdeDDev + "/" + line[line.index("= \"")+3:len(line)-2]
-            #print DDEV_PROJ_Projects_View1            
+            #print DDEV_PROJ_Projects_View1
+        elif "PROJ_Projects_Status_Updates_View2" in line:
+            DDEV_PROJ_Projects_Status_Updates_View2 = sdeDDev + "/" + line[line.index("= \"")+3:len(line)-2]
+            #print DDEV_PROJ_Projects_View2
+        elif "PROJ_Projects_Status_Updates_View3" in line:
+            DDEV_PROJ_Projects_Status_Updates_View3 = sdeDDev + "/" + line[line.index("= \"")+3:len(line)-2]
+            #print DDEV_PROJ_Projects_View3
+        elif "PROJ_Projects_Status_Updates_View4" in line:
+            DDEV_PROJ_Projects_Status_Updates_View4 = sdeDDev + "/" + line[line.index("= \"")+3:len(line)-2]
+            #print DDEV_PROJ_Projects_View4            
         elif "AssetID" in line:
             RAIL_AssetID = sdeRail + "/" + line[line.index("= \"")+3:len(line)-2]
             #print RAIL_AssetID
@@ -110,6 +122,18 @@ for line in lines:
         elif "Rail_LRS" in line:
             Rail_LRS = sdeRail + "/" + line[line.index("= \"")+3:len(line)-2]
             #print RAIL_AssetID
+        elif "Project_Points_FC" in line:
+            DDEV_Project_Points_FC = sdeDDev + "/" + line[line.index("= \"")+3:len(line)-2]
+            #print Project_Points_FC
+        elif "Project_Lines_FC" in line:
+            DDEV_Project_Lines_FC = sdeDDev + "/" + line[line.index("= \"")+3:len(line)-2]
+            #print DDEV_Project_Lines_FC            
+        elif "PROJ_Points_PROJ_StatusUpdates_REL" in line:
+            DDEV_PROJ_Points_PROJ_StatusUpdates_REL = sdeDDev + "/" + line[line.index("= \"")+3:len(line)-2]
+            #print DDEV_PROJ_Points_PROJ_StatusUpdates_REL            
+        elif "PROJ_Lines_PROJ_StatusUpdates_REL" in line:
+            DDEV_PROJ_Lines_PROJ_StatusUpdates_REL = sdeDDev + "/" + line[line.index("= \"")+3:len(line)-1]
+            #print DDEV_PROJ_Lines_PROJ_StatusUpdates_REL 
         else:
             pass
 
@@ -124,112 +148,14 @@ def CalcVRLIDs():
         global DDEV_PROJ_Projects_View1
         global DDEV_PROJ_Projects_View2
 
-        fieldInfo = ("OBJECTID OBJECTID VISIBLE NONE;Shape Shape VISIBLE NONE;" + 
-                    "ProjectName ProjectName VISIBLE NONE;" + 
-                    "ProjectType ProjectType VISIBLE NONE;" + 
-                    "PIN PIN VISIBLE NONE;" + 
-                    "VTransPM VTransPM VISIBLE NONE;" + 
-                    "ConsultantPM ConsultantPM VISIBLE NONE;" + 
-                    "Consultant Consultant VISIBLE NONE;" + 
-                    "ConsultantPMContact ConsultantPMContact VISIBLE NONE;" + 
-                    "RailLine RailLine VISIBLE NONE;" + 
-                    "FromMP FromMP VISIBLE NONE;" + 
-                    "ToMP ToMP VISIBLE NONE;" + 
-                    "AssetType AssetType VISIBLE NONE;" + 
-                    "AssetID AssetID VISIBLE NONE;" + 
-                    "LocationType LocationType VISIBLE NONE;" + 
-                    "AssetNumber AssetNumber VISIBLE NONE;" + 
-                    "BasicDescription BasicDescription VISIBLE NONE;" + 
-                    "ProjectDescription ProjectDescription VISIBLE NONE;" + 
-                    "LatestConstEst LatestConstEst VISIBLE NONE;" + 
-                    "EnvAllClear EnvAllClear VISIBLE NONE;" + 
-                    "UtilClear UtilClear VISIBLE NONE;" + 
-                    "ROWClear ROWClear VISIBLE NONE;" + 
-                    "RRClear RRClear VISIBLE NONE;" + 
-                    "AdvertiseTarget AdvertiseTarget VISIBLE NONE;" + 
-                    "Include Include VISIBLE NONE;" + 
-                    "created_user created_user VISIBLE NONE;" + 
-                    "created_date created_date VISIBLE NONE;" + 
-                    "last_edited_user last_edited_user VISIBLE NONE;" + 
-                    "last_edited_date last_edited_date VISIBLE NONE")
-
 # Process: Add Project web fc table view
-        arcpy.MakeTableView_management(DDEV_Add_Project_WebFC, DDEV_PROJ_Projects_View1, "", "", fieldInfo)
-
-
-        fieldMapping = ("ProjectName \"Project Name\" true true false 100 Text 0 0 ,First,#,DDEV_PROJ_Projects_View1,ProjectName,-1,-1;" + 
-                        "ProjectType \"ProjectType\" true true false 255 Text 0 0 ,First,#,DDEV_PROJ_Projects_View1,ProjectType,-1,-1;" + 
-                        "PIN \"PIN Number\" true true false 7 Text 0 0 ,First,#,DDEV_PROJ_Projects_View1,PIN,-1,-1;" + 
-                        "VTransPM \"VTrans Project Manager\" true true false 255 Text 0 0 ,First,#,DDEV_PROJ_Projects_View1,VTransPM,-1,-1;" + 
-                        "ConsultantPM \"Consultant Project Manager\" true true false 255 Text 0 0 ,First,#,DDEV_PROJ_Projects_View1,ConsultantPM,-1,-1;" + 
-                        "Consultant \"Consultant\" true true false 255 Text 0 0 ,First,#,DDEV_PROJ_Projects_View1,Consultant,-1,-1;" + 
-                        "ConsultantPMContact \"Consultant PM Contact Info\" true true false 250 Text 0 0 ,First,#,DDEV_PROJ_Projects_View1,ConsultantPMContact,-1,-1;" +
-                        "RailLine \"Rail Line\" true true false 255 Text 0 0 ,First,#,DDEV_PROJ_Projects_View1,RailLine,-1,-1;" + 
-                        "VRLID \"VRLID\" true true false 255 Text 0 0 ,First,#;" + 
-                        "LineName \"Line Name\" true true false 255 Text 0 0 ,First,#;" +
-                        "Operator \"Operator\" true true false 255 Text 0 0 ,First,#;" + 
-                        "Division \"Division\" true true false 255 Text 0 0 ,First,#;" + 
-                        "Subdivision \"Subdivision\" true true false 255 Text 0 0 ,First,#;" + 
-                        "Branch \"Branch\" true true false 255 Text 0 0 ,First,#;" + 
-                        "StateOwned \"State Owned\" true true false 255 Text 0 0 ,First,#;" + 
-                        "RailTrail \"Rail Trail\" true true false 255 Text 0 0 ,First,#;" + 
-                        "FromMP \"FromMP\" true true false 8 Double 8 38 ,First,#,DDEV_PROJ_Projects_View1,FromMP,-1,-1;" + 
-                        "ToMP \"ToMP\" true true false 8 Double 8 38 ,First,#,DDEV_PROJ_Projects_View1,ToMP,-1,-1;" + 
-                        "AssetType \"Asset Type\" true true false 255 Text 0 0 ,First,#,DDEV_PROJ_Projects_View1,AssetType,-1,-1;" + 
-                        "AssetID \"AssetID\" true true false 255 Text 0 0 ,First,#,DDEV_PROJ_Projects_View1,AssetID,-1,-1;" + 
-                        "LocationType \"Location Type\" true true false 255 Text 0 0 ,First,#,DDEV_PROJ_Projects_View1,LocationType,-1,-1;" + 
-                        "AssetNumber \"Asset Number\" true true false 255 Text 0 0 ,First,#,DDEV_PROJ_Projects_View1,AssetNumber,-1,-1;" + 
-                        "BasicDescription \"Basic Project Description\" true true false 250 Text 0 0 ,First,#,DDEV_PROJ_Projects_View1,BasicDescription,-1,-1;" + 
-                        "ProjectDescription \"Full Project Description\" true true false 500 Text 0 0 ,First,#,DDEV_PROJ_Projects_View1,ProjectDescription,-1,-1;" + 
-                        "LatestConstEst \"Latest Construction Estimate w/ E&C\" true true false 8 Double 8 38 ,First,#,DDEV_PROJ_Projects_View1,LatestConstEst,-1,-1;" + 
-                        "EnvAllClear \"Environmental All Clear\" true true false 255 Text 0 0 ,First,#,DDEV_PROJ_Projects_View1,EnvAllClear,-1,-1;" + 
-                        "UtilClear \"Utilities Clearance\" true true false 255 Text 0 0 ,First,#,DDEV_PROJ_Projects_View1,UtilClear,-1,-1;" + 
-                        "ROWClear \"ROW Clearance\" true true false 255 Text 0 0 ,First,#,DDEV_PROJ_Projects_View1,ROWClear,-1,-1;" + 
-                        "RRClear \"Railroad Clearance\" true true false 255 Text 0 0 ,First,#,DDEV_PROJ_Projects_View1,RRClear,-1,-1;" + 
-                        "AdvertiseTarget \"Project Advertisement Target\" true true false 255 Text 0 0 ,First,#,DDEV_PROJ_Projects_View1,AdvertiseTarget,-1,-1;" + 
-                        "Include \"Include In Reports\" true true false 255 Text 0 0 ,First,#,DDEV_PROJ_Projects_View1,Include,-1,-1")
+        arcpy.MakeTableView_management(DDEV_Add_Project_WebFC, DDEV_PROJ_Projects_View1)
 
 # Process: Append add project to project table
-        arcpy.Append_management(DDEV_PROJ_Projects_View1, DDEV_Projects_Table, "NO_TEST", fieldMapping, "")
-
-        fieldInfo = ("OBJECTID OBJECTID VISIBLE NONE;" + 
-                    "ProjectName ProjectName VISIBLE NONE;" + 
-                    "ProjectType ProjectType VISIBLE NONE;" + 
-                    "PIN PIN VISIBLE NONE;" + 
-                    "VTransPM VTransPM VISIBLE NONE;" + 
-                    "ConsultantPM ConsultantPM VISIBLE NONE;" + 
-                    "Consultant Consultant VISIBLE NONE;" + 
-                    "ConsultantPMContact ConsultantPMContact VISIBLE NONE;" +
-                    "RailLine RailLine VISIBLE NONE;VRLID VRLID VISIBLE NONE;" + 
-                    "LineName LineName VISIBLE NONE;" + 
-                    "Operator Operator VISIBLE NONE;" + 
-                    "Division Division VISIBLE NONE;" + 
-                    "Subdivision Subdivision VISIBLE NONE;" + 
-                    "Branch Branch VISIBLE NONE;" + 
-                    "StateOwned StateOwned VISIBLE NONE;" +
-                    "RailTrail RailTrail VISIBLE NONE;" + 
-                    "FromMP FromMP VISIBLE NONE;" + 
-                    "ToMP ToMP VISIBLE NONE;" + 
-                    "AssetType AssetType VISIBLE NONE;" + 
-                    "AssetID AssetID VISIBLE NONE;" + 
-                    "LocationType LocationType VISIBLE NONE;" + 
-                    "AssetNumber AssetNumber VISIBLE NONE;" + 
-                    "BasicDescription BasicDescription VISIBLE NONE;" + 
-                    "ProjectDescription ProjectDescription VISIBLE NONE;" + 
-                    "LatestConstEst LatestConstEst VISIBLE NONE;" + 
-                    "EnvAllClear EnvAllClear VISIBLE NONE;" + 
-                    "UtilClear UtilClear VISIBLE NONE;" + 
-                    "ROWClear ROWClear VISIBLE NONE;" + 
-                    "RRClear RRClear VISIBLE NONE;" + 
-                    "AdvertiseTarget AdvertiseTarget VISIBLE NONE;" + 
-                    "Include Include VISIBLE NONE;" + 
-                    "created_user created_user VISIBLE NONE;" + 
-                    "created_date created_date VISIBLE NONE;" + 
-                    "last_edited_user last_edited_user VISIBLE NONE;"
-                    "last_edited_date last_edited_date VISIBLE NONE")
+        arcpy.Append_management(DDEV_PROJ_Projects_View1, DDEV_Projects_Table, "NO_TEST")
 
 # Process: project table view
-        arcpy.MakeTableView_management(DDEV_Projects_Table, DDEV_PROJ_Projects_View2, "", "", fieldInfo)
+        arcpy.MakeTableView_management(DDEV_Projects_Table, DDEV_PROJ_Projects_View2)
 
 # Process: join to asset ID
         arcpy.AddJoin_management(DDEV_PROJ_Projects_View2, "AssetID", RAIL_AssetID, "AssetID", "KEEP_COMMON")
@@ -259,46 +185,9 @@ def dynSegAddProjects():
         global DDEV_PROJ_Projects_View5
         global Rail_LRS
         
-        fieldInfo = ("OBJECTID OBJECTID VISIBLE NONE;" +
-                    "ProjectName ProjectName VISIBLE NONE;" +
-                    "ProjectType ProjectType VISIBLE NONE;" +
-                    "PIN PIN VISIBLE NONE;" +
-                    "VTransPM VTransPM VISIBLE NONE;" +
-                    "ConsultantPM ConsultantPM VISIBLE NONE;" +
-                    "Consultant Consultant VISIBLE NONE;" +
-                    "ConsultantPMContact ConsultantPMContact VISIBLE NONE;" +
-                    "RailLine RailLine VISIBLE NONE;" +
-                    "VRLID VRLID VISIBLE NONE;" +
-                    "LineName LineName VISIBLE NONE;" +
-                    "Operator Operator VISIBLE NONE;" +
-                    "Division Division VISIBLE NONE;" +
-                    "Subdivision Subdivision VISIBLE NONE;" +
-                    "Branch Branch VISIBLE NONE;" +
-                    "StateOwned StateOwned VISIBLE NONE;" +
-                    "RailTrail RailTrail VISIBLE NONE;" +
-                    "FromMP FromMP VISIBLE NONE;" +
-                    "ToMP ToMP VISIBLE NONE;" +
-                    "AssetType AssetType VISIBLE NONE;" +
-                    "AssetID AssetID VISIBLE NONE;" +
-                    "LocationType LocationType VISIBLE NONE;" +
-                    "AssetNumber AssetNumber VISIBLE NONE;" +
-                    "BasicDescription BasicDescription VISIBLE NONE;" +
-                    "ProjectDescription ProjectDescription VISIBLE NONE;" +
-                    "LatestConstEst LatestConstEst VISIBLE NONE;" +
-                    "EnvAllClear EnvAllClear VISIBLE NONE;" +
-                    "UtilClear UtilClear VISIBLE NONE;" +
-                    "ROWClear ROWClear VISIBLE NONE;" +
-                    "RRClear RRClear VISIBLE NONE;" +
-                    "AdvertiseTarget AdvertiseTarget VISIBLE NONE;" +
-                    "Include Include VISIBLE NONE;" +
-                    "created_user created_user VISIBLE NONE;" +
-                    "created_date created_date VISIBLE NONE;" +
-                    "last_edited_user last_edited_user VISIBLE NONE;" +
-                    "last_edited_date last_edited_date VISIBLE NONE")
-        
 # Process: Make Table View
         print "dynSegAddProjects:  Creating first table view for appending LRS attributes to project data..."
-        arcpy.MakeTableView_management(DDEV_Projects_Table, DDEV_PROJ_Projects_View3, "", "", fieldInfo) 
+        arcpy.MakeTableView_management(DDEV_Projects_Table, DDEV_PROJ_Projects_View3) 
 
         
 # Process: Join project table to Rail LRS
@@ -332,98 +221,22 @@ def dynSegAddProjects():
 # Process: Calculate RailTrail
         arcpy.CalculateField_management(DDEV_PROJ_Projects_View3, "RailTrail", "!GDB_Rail.RAIL_ADMIN.INV_Rail_LRS.RailTrail!", "PYTHON", "")
 
-
-        fieldInfo = ("OBJECTID OBJECTID VISIBLE NONE;" +
-                    "ProjectName ProjectName VISIBLE NONE;" +
-                    "ProjectType ProjectType VISIBLE NONE;" +
-                    "PIN PIN VISIBLE NONE;" +
-                    "VTransPM VTransPM VISIBLE NONE;" +
-                    "ConsultantPM ConsultantPM VISIBLE NONE;" +
-                    "Consultant Consultant VISIBLE NONE;" +
-                    "ConsultantPMContact ConsultantPMContact VISIBLE NONE;" +
-                    "RailLine RailLine VISIBLE NONE;" +
-                    "VRLID VRLID VISIBLE NONE;" +
-                    "LineName LineName VISIBLE NONE;" +
-                    "Operator Operator VISIBLE NONE;" +
-                    "Division Division VISIBLE NONE;" +
-                    "Subdivision Subdivision VISIBLE NONE;" +
-                    "Branch Branch VISIBLE NONE;" +
-                    "StateOwned StateOwned VISIBLE NONE;" +
-                    "RailTrail RailTrail VISIBLE NONE;" +
-                    "FromMP FromMP VISIBLE NONE;" +
-                    "ToMP ToMP VISIBLE NONE;" +
-                    "AssetType AssetType VISIBLE NONE;" +
-                    "AssetID AssetID VISIBLE NONE;" +
-                    "LocationType LocationType VISIBLE NONE;" +
-                    "AssetNumber AssetNumber VISIBLE NONE;" +
-                    "BasicDescription BasicDescription VISIBLE NONE;" +
-                    "ProjectDescription ProjectDescription VISIBLE NONE;" +
-                    "LatestConstEst LatestConstEst VISIBLE NONE;" +
-                    "EnvAllClear EnvAllClear VISIBLE NONE;" +
-                    "UtilClear UtilClear VISIBLE NONE;" +
-                    "ROWClear ROWClear VISIBLE NONE;" +
-                    "RRClear RRClear VISIBLE NONE;" +
-                    "AdvertiseTarget AdvertiseTarget VISIBLE NONE;" +
-                    "Include Include VISIBLE NONE;" +
-                    "created_user created_user VISIBLE NONE;" +
-                    "created_date created_date VISIBLE NONE;" +
-                    "last_edited_user last_edited_user VISIBLE NONE;" +
-                    "last_edited_date last_edited_date VISIBLE NONE")
-
 # Process: Query projects table - points
         print "dynSegAddProjects:  Creating second table view for generating project point data..."
-        arcpy.MakeTableView_management(DDEV_Projects_Table, DDEV_PROJ_Projects_View4, "ToMP IS NULL", "", )
+        arcpy.MakeTableView_management(DDEV_Projects_Table, DDEV_PROJ_Projects_View4, "ToMP IS NULL")
 
         
 # Process: Dynseg points
         print "dynSegAddProjects:  DynSegging second table view to in-memory point layer..."
         lyrPoints = "Point Events"
-        arcpy.MakeRouteEventLayer_lr(Rail_LRS, "VRLID", DDEV_PROJ_Projects_View4, "VRLID POINT FromMP", lyrPoints, "", "NO_ERROR_FIELD", "NO_ANGLE_FIELD", "NORMAL", "ANGLE", "LEFT", "POINT")
-        
-        fieldMapping = ("ProjectName \"Project Name\" true true false 100 Text 0 0 ,First,#,Point Events,ProjectName,-1,-1;" +
-                        "ProjectType \"ProjectType\" true true false 255 Text 0 0 ,First,#,Point Events,ProjectType,-1,-1;" +
-                        "PIN \"PIN Number\" true true false 7 Text 0 0 ,First,#,Point Events,PIN,-1,-1;" +
-                        "VTransPM \"VTrans Project Manager\" true true false 255 Text 0 0 ,First,#,Point Events,VTransPM,-1,-1;" +
-                        "ConsultantPM \"Consultant Project Manager\" true true false 255 Text 0 0 ,First,#,Point Events,ConsultantPM,-1,-1;" +
-                        "Consultant \"Consultant\" true true false 255 Text 0 0 ,First,#,Point Events,Consultant,-1,-1;" +
-                        "ConsultantPMContact \"Consultant PM Contact Info\" true true false 250 Text 0 0 ,First,#,Point Events,ConsultantPMContact,-1,-1;" +
-                        "RailLine \"Rail Line\" true true false 255 Text 0 0 ,First,#,Point Events,RailLine,-1,-1;" +
-                        "VRLID \"VRLID\" true true false 255 Text 0 0 ,First,#,Point Events,VRLID,-1,-1;" +
-                        "LineName \"Line Name\" true true false 255 Text 0 0 ,First,#,Point Events,LineName,-1,-1;" +
-                        "Operator \"Operator\" true true false 255 Text 0 0 ,First,#,Point Events,Operator,-1,-1;" +
-                        "Division \"Division\" true true false 255 Text 0 0 ,First,#,Point Events,Division,-1,-1;" +
-                        "Subdivision \"Subdivision\" true true false 255 Text 0 0 ,First,#,Point Events,Subdivision,-1,-1;" +
-                        "Branch \"Branch\" true true false 255 Text 0 0 ,First,#,Point Events,Branch,-1,-1;" +
-                        "StateOwned \"State Owned\" true true false 255 Text 0 0 ,First,#,Point Events,StateOwned,-1,-1;" +
-                        "RailTrail \"Rail Trail\" true true false 255 Text 0 0 ,First,#,Point Events,RailTrail,-1,-1;" +
-                        "FromMP \"FromMP\" true true false 8 Double 8 38 ,First,#,Point Events,FromMP,-1,-1;" +
-                        "ToMP \"ToMP\" true true false 8 Double 8 38 ,First,#,Point Events,ToMP,-1,-1;" +
-                        "AssetType \"Asset Type\" true true false 255 Text 0 0 ,First,#,Point Events,AssetType,-1,-1;" +
-                        "AssetID \"AssetID\" true true false 255 Text 0 0 ,First,#,Point Events,AssetID,-1,-1;" +
-                        "LocationType \"Location Type\" true true false 255 Text 0 0 ,First,#,Point Events,LocationType,-1,-1;" +
-                        "AssetNumber \"Asset Number\" true true false 255 Text 0 0 ,First,#,Point Events,AssetNumber,-1,-1;" +
-                        "BasicDescription \"Basic Project Description\" true true false 250 Text 0 0 ,First,#,Point Events,BasicDescription,-1,-1;" +
-                        "ProjectDescription \"Full Project Description\" true true false 500 Text 0 0 ,First,#,Point Events,ProjectDescription,-1,-1;" +
-                        "LatestConstEst \"Latest Construction Estimate w/ E&C\" true true false 8 Double 8 38 ,First,#,Point Events,LatestConstEst,-1,-1;" +
-                        "EnvAllClear \"Environmental All Clear\" true true false 255 Text 0 0 ,First,#,Point Events,EnvAllClear,-1,-1;" +
-                        "UtilClear \"Utilities Clearance\" true true false 255 Text 0 0 ,First,#,Point Events,UtilClear,-1,-1;" +
-                        "ROWClear \"ROW Clearance\" true true false 255 Text 0 0 ,First,#,Point Events,ROWClear,-1,-1;" +
-                        "RRClear \"Railroad Clearance\" true true false 255 Text 0 0 ,First,#,Point Events,RRClear,-1,-1;" +
-                        "AdvertiseTarget \"Project Advertisement Target\" true true false 255 Text 0 0 ,First,#,Point Events,AdvertiseTarget,-1,-1;" +
-                        "Include \"Include In Reports\" true true false 255 Text 0 0 ,First,#,Point Events,Include,-1,-1;" +
-                        "created_user \"created_user\" false true false 255 Text 0 0 ,First,#,Point Events,created_user,-1,-1;" +
-                        "created_date \"created_date\" false true false 36 Date 0 0 ,First,#,Point Events,created_date,-1,-1;" +
-                        "last_edited_user \"last_edited_user\" false true false 255 Text 0 0 ,First,#,Point Events,last_edited_user,-1,-1;" +
-                        "last_edited_date \"last_edited_date\" false true false 36 Date 0 0 ,First,#,Point Events,last_edited_date,-1,-1")
-
-
-            
+        arcpy.MakeRouteEventLayer_lr(Rail_LRS, "VRLID", DDEV_PROJ_Projects_View4, "VRLID POINT FromMP", lyrPoints)
+                   
 # Process: Project points to FC
         if arcpy.Exists(sdeDDev + "/PROJ_Points"):
             arcpy.Delete_management(sdeDDev + "/PROJ_Points")
     
         print "dynSegAddProjects:  Saving in-memory point layer to GDB..."
-        arcpy.FeatureClassToFeatureClass_conversion(lyrPoints, sdeDDev, "PROJ_Points", "", fieldMapping, "")
+        arcpy.FeatureClassToFeatureClass_conversion(lyrPoints, sdeDDev, "PROJ_Points")
 
 # Process: Add Fields
         print "dynSegAddProjects:  Adding version tracking fields to new point FC..."
@@ -432,47 +245,9 @@ def dynSegAddProjects():
         arcpy.AddField_management(sdeDDev + "/PROJ_Points", "last_edited_user", "TEXT", "", "", "255", "", "NULLABLE", "NON_REQUIRED", "")
         arcpy.AddField_management(sdeDDev + "/PROJ_Points", "last_edited_date", "DATE", "", "", "", "", "NULLABLE", "NON_REQUIRED", "")
 
-
-        fieldInfo = ("OBJECTID OBJECTID VISIBLE NONE;" +
-                    "ProjectName ProjectName VISIBLE NONE;" +
-                    "ProjectType ProjectType VISIBLE NONE;" +
-                    "PIN PIN VISIBLE NONE;" +
-                    "VTransPM VTransPM VISIBLE NONE;" +
-                    "ConsultantPM ConsultantPM VISIBLE NONE;" +
-                    "Consultant Consultant VISIBLE NONE;" +
-                    "ConsultantPMContact ConsultantPMContact VISIBLE NONE;" +
-                    "RailLine RailLine VISIBLE NONE;" +
-                    "VRLID VRLID VISIBLE NONE;" +
-                    "LineName LineName VISIBLE NONE;" +
-                    "Operator Operator VISIBLE NONE;" +
-                    "Division Division VISIBLE NONE;" +
-                    "Subdivision Subdivision VISIBLE NONE;" +
-                    "Branch Branch VISIBLE NONE;" +
-                    "StateOwned StateOwned VISIBLE NONE;" +
-                    "RailTrail RailTrail VISIBLE NONE;" +
-                    "FromMP FromMP VISIBLE NONE;" +
-                    "ToMP ToMP VISIBLE NONE;" +
-                    "AssetType AssetType VISIBLE NONE;" +
-                    "AssetID AssetID VISIBLE NONE;" +
-                    "LocationType LocationType VISIBLE NONE;" +
-                    "AssetNumber AssetNumber VISIBLE NONE;" +
-                    "BasicDescription BasicDescription VISIBLE NONE;" +
-                    "ProjectDescription ProjectDescription VISIBLE NONE;" +
-                    "LatestConstEst LatestConstEst VISIBLE NONE;" +
-                    "EnvAllClear EnvAllClear VISIBLE NONE;" +
-                    "UtilClear UtilClear VISIBLE NONE;" +
-                    "ROWClear ROWClear VISIBLE NONE;" +
-                    "RRClear RRClear VISIBLE NONE;" +
-                    "AdvertiseTarget AdvertiseTarget VISIBLE NONE;" +
-                    "Include Include VISIBLE NONE;" +
-                    "created_user created_user VISIBLE NONE;" +
-                    "created_date created_date VISIBLE NONE;" +
-                    "last_edited_user last_edited_user VISIBLE NONE;" +
-                    "last_edited_date last_edited_date VISIBLE NONE")
-
 # Process: Query projects table - lines
         print "dynSegAddProjects:  Creating third table view for generating project line data..."        
-        arcpy.MakeTableView_management(DDEV_Projects_Table, DDEV_PROJ_Projects_View5, "ToMP IS NOT NULL", "", fieldInfo)
+        arcpy.MakeTableView_management(DDEV_Projects_Table, DDEV_PROJ_Projects_View5, "ToMP IS NOT NULL")
 
         print "dynSegAddProjects:  There are potentially " + str(arcpy.GetCount_management(DDEV_PROJ_Projects_View5)) + " polylines in the data..."
 
@@ -481,49 +256,13 @@ def dynSegAddProjects():
         lyrLines = "Line Events"
         arcpy.MakeRouteEventLayer_lr(Rail_LRS, "VRLID", DDEV_PROJ_Projects_View5, "VRLID LINE FromMP ToMP", lyrLines)
 
-        fieldMapping = ("ProjectName \"Project Name\" true true false 100 Text 0 0 ,First,#,Line Events,ProjectName,-1,-1;" +
-                        "ProjectType \"ProjectType\" true true false 255 Text 0 0 ,First,#,Line Events,ProjectType,-1,-1;" +
-                        "PIN \"PIN Number\" true true false 7 Text 0 0 ,First,#,Line Events,PIN,-1,-1;" +
-                        "VTransPM \"VTrans Project Manager\" true true false 255 Text 0 0 ,First,#,Line Events,VTransPM,-1,-1;" +
-                        "ConsultantPM \"Consultant Project Manager\" true true false 255 Text 0 0 ,First,#,Line Events,ConsultantPM,-1,-1;" +
-                        "Consultant \"Consultant\" true true false 255 Text 0 0 ,First,#,Line Events,Consultant,-1,-1;" +
-                        "ConsultantPMContact \"Consultant PM Contact Info\" true true false 250 Text 0 0 ,First,#,Line Events,ConsultantPMContact,-1,-1;" +
-                        "RailLine \"Rail Line\" true true false 255 Text 0 0 ,First,#,Line Events,RailLine,-1,-1;" +
-                        "VRLID \"VRLID\" true true false 255 Text 0 0 ,First,#,Line Events,VRLID,-1,-1;" +
-                        "LineName \"Line Name\" true true false 255 Text 0 0 ,First,#,Line Events,LineName,-1,-1;" +
-                        "Operator \"Operator\" true true false 255 Text 0 0 ,First,#,Line Events,Operator,-1,-1;" +
-                        "Division \"Division\" true true false 255 Text 0 0 ,First,#,Line Events,Division,-1,-1;" +
-                        "Subdivision \"Subdivision\" true true false 255 Text 0 0 ,First,#,Line Events,Subdivision,-1,-1;" +
-                        "Branch \"Branch\" true true false 255 Text 0 0 ,First,#,Line Events,Branch,-1,-1;" +
-                        "StateOwned \"State Owned\" true true false 255 Text 0 0 ,First,#,Line Events,StateOwned,-1,-1;" +
-                        "RailTrail \"Rail Trail\" true true false 255 Text 0 0 ,First,#,Line Events,RailTrail,-1,-1;" +
-                        "FromMP \"FromMP\" true true false 8 Double 8 38 ,First,#,Line Events,FromMP,-1,-1;" +
-                        "ToMP \"ToMP\" true true false 8 Double 8 38 ,First,#,Line Events,ToMP,-1,-1;" +
-                        "AssetType \"Asset Type\" true true false 255 Text 0 0 ,First,#,Line Events,AssetType,-1,-1;" +
-                        "AssetID \"AssetID\" true true false 255 Text 0 0 ,First,#,Line Events,AssetID,-1,-1;" +
-                        "LocationType \"Location Type\" true true false 255 Text 0 0 ,First,#,Line Events,LocationType,-1,-1;" +
-                        "AssetNumber \"Asset Number\" true true false 255 Text 0 0 ,First,#,Line Events,AssetNumber,-1,-1;" +
-                        "BasicDescription \"Basic Project Description\" true true false 250 Text 0 0 ,First,#,Line Events,BasicDescription,-1,-1;" +
-                        "ProjectDescription \"Full Project Description\" true true false 500 Text 0 0 ,First,#,Line Events,ProjectDescription,-1,-1;" +
-                        "LatestConstEst \"Latest Construction Estimate w/ E&C\" true true false 8 Double 8 38 ,First,#,Line Events,LatestConstEst,-1,-1;" +
-                        "EnvAllClear \"Environmental All Clear\" true true false 255 Text 0 0 ,First,#,Line Events,EnvAllClear,-1,-1;" +
-                        "UtilClear \"Utilities Clearance\" true true false 255 Text 0 0 ,First,#,Line Events,UtilClear,-1,-1;" +
-                        "ROWClear \"ROW Clearance\" true true false 255 Text 0 0 ,First,#,Line Events,ROWClear,-1,-1;" +
-                        "RRClear \"Railroad Clearance\" true true false 255 Text 0 0 ,First,#,Line Events,RRClear,-1,-1;" +
-                        "AdvertiseTarget \"Project Advertisement Target\" true true false 255 Text 0 0 ,First,#,Line Events,AdvertiseTarget,-1,-1;" +
-                        "Include \"Include In Reports\" true true false 255 Text 0 0 ,First,#,Line Events,Include,-1,-1;" +
-                        "created_user \"created_user\" false true false 255 Text 0 0 ,First,#,Line Events,created_user,-1,-1;" +
-                        "created_date \"created_date\" false true false 36 Date 0 0 ,First,#,Line Events,created_date,-1,-1;" +
-                        "last_edited_user \"last_edited_user\" false true false 255 Text 0 0 ,First,#,Line Events,last_edited_user,-1,-1;" +
-                        "last_edited_date \"last_edited_date\" false true false 36 Date 0 0 ,First,#,Line Events,last_edited_date,-1,-1")
-
         print "dynSegAddProjects:  " + str(arcpy.GetCount_management(lyrLines)) + " polylines  were created..."
 
 # Process: Project lines to FC
         if arcpy.Exists(sdeDDev + "/PROJ_Lines"):
             arcpy.Delete_management(sdeDDev + "/PROJ_Lines")
         print "dynSegAddProjects:  Saving in-memory line layer to GDB..."
-        arcpy.FeatureClassToFeatureClass_conversion(lyrLines, sdeDDev, "PROJ_Lines", "", fieldMapping, "")
+        arcpy.FeatureClassToFeatureClass_conversion(lyrLines, sdeDDev, "PROJ_Lines")
 
 # Process: Add Fields
         print "dynSegAddProjects:  Adding version tracking fields to new line FC..."
@@ -545,36 +284,19 @@ def dynSegAddProjects():
         fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]      
         print(fname, exc_tb.tb_lineno, msg)
 
-def statusUpdateAppend():
+def statusUpdatesAppend():
     try:
         global DDEV_Status_Update_WebFC
         global DDEV_PROJ_Status_Updates_Table
         global DDEV_PROJ_Projects_Status_Updates_View1
 
-        fieldInfo = ("OBJECTID OBJECTID VISIBLE NONE;" + 
-                     "Shape Shape VISIBLE NONE;" +
-                     "ProjectName ProjectName VISIBLE NONE;" +
-                     "Status Status VISIBLE NONE;" +
-                     "Action Action VISIBLE NONE;" +
-                     "LatestConstEst LatestConstEst VISIBLE NONE;" +
-                     "EnvAllClear EnvAllClear VISIBLE NONE;" +
-                     "UtilClear UtilClear VISIBLE NONE;" +
-                     "ROWClear ROWClear VISIBLE NONE;" +
-                     "RRClear RRClear VISIBLE NONE;" +
-                     "AdvertiseTarget AdvertiseTarget VISIBLE NONE;" +
-                     "ProjectManager ProjectManager VISIBLE NONE;" +
-                     "created_user created_user VISIBLE NONE;" +
-                     "created_date created_date VISIBLE NONE;" +
-                     "last_edited_user last_edited_user VISIBLE NONE;" +
-                     "last_edited_date last_edited_date VISIBLE NONE")
-
-        # Process: Status update web FC table view
+        #Status update web FC table view
         print "statusUpdateAppend:  Creating table view for appending new project status data to master..."        
-        arcpy.MakeTableView_management(DDEV_Status_Update_WebFC, DDEV_PROJ_Projects_Status_Updates_View1, "", "", fieldInfo)
+        arcpy.MakeTableView_management(DDEV_Status_Update_WebFC, DDEV_PROJ_Projects_Status_Updates_View1)
 
         print "statusUpdateAppend: There are " + str(arcpy.GetCount_management(DDEV_PROJ_Projects_Status_Updates_View1)) + " status updates available to append..."
 
-        # Process: Append status web FC to status table
+        #Append status web FC to status table
         print "statusUpdateAppend:  Appending new project status data to master..."
         arcpy.Append_management(DDEV_PROJ_Projects_Status_Updates_View1, DDEV_PROJ_Status_Updates_Table, "NO_TEST")
         
@@ -582,6 +304,100 @@ def statusUpdateAppend():
         exc_type, exc_obj, exc_tb = sys.exc_info()
         fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]      
         print(fname, exc_tb.tb_lineno, msg)
+
+def dynSegStatusUpdates():
+    try:
+        global sdeDDev
+        global DDEV_Projects_Table
+        global Rail_LRS
+        global DDEV_PROJ_Status_Updates_Table
+        global DDEV_PROJ_Projects_Status_Updates_View2
+        global DDEV_PROJ_Projects_Status_Updates_View3
+        global DDEV_PROJ_Projects_Status_Updates_View4
+        global DDEV_PROJ_Projects_View6
+
+        #Make Table Views of project and project status masters for joining
+        print "dynSegStatusUpdates:  Creating project and project status table views for joining..."
+        arcpy.MakeTableView_management(DDEV_PROJ_Status_Updates_Table, DDEV_PROJ_Projects_Status_Updates_View2)
+        arcpy.MakeTableView_management(DDEV_Projects_Table, DDEV_PROJ_Projects_View6)        
+
+        #Join project status to projects
+        print "dynSegStatusUpdates:  Joining project status to project table views in order to calculate rail lrs values..."
+        arcpy.AddJoin_management(DDEV_PROJ_Projects_Status_Updates_View2, "ProjectName", DDEV_PROJ_Projects_View6, "ProjectName", "KEEP_COMMON")        
+
+        print "dynSegStatusUpdates:  Appending LRS attributes to project status data..." 
+        #Calculate Field VRLID into project status
+        arcpy.CalculateField_management(DDEV_PROJ_Projects_Status_Updates_View2, "VRLID", "!GDB_DDev.DDev_ADMIN.PROJ_Projects.VRLID!", "PYTHON", "")
+
+        #Calculate Field FromMP into project status
+        arcpy.CalculateField_management(DDEV_PROJ_Projects_Status_Updates_View2, "FromMP", "!GDB_DDev.DDev_ADMIN.PROJ_Projects.FromMP!", "PYTHON", "")
+
+        #Calculate Field ToMP into project status
+        arcpy.CalculateField_management(DDEV_PROJ_Projects_Status_Updates_View2, "ToMP", "!GDB_DDev.DDev_ADMIN.PROJ_Projects.ToMP!", "PYTHON", "")
+
+        #Make Table View of project status master for point dyn seg
+        print "dynSegStatusUpdates:  Creating project status table views for creating point events..."
+        arcpy.MakeTableView_management(DDEV_PROJ_Status_Updates_Table, DDEV_PROJ_Projects_Status_Updates_View3, "ToMP IS NULL")
+
+        print "dynSegAddProjects:  There are " + str(arcpy.GetCount_management(DDEV_PROJ_Projects_Status_Updates_View3)) + " records in the table view for points..."
+        
+        #Make Route Event Point Layer project status table view
+        print "dynSegStatusUpdates:  Creating point events..."
+        Point_Events = "lyrPoints"
+        arcpy.MakeRouteEventLayer_lr(Rail_LRS, "VRLID", DDEV_PROJ_Projects_Status_Updates_View3, "VRLID POINT FromMP", Point_Events)
+
+        print "dynSegAddProjects:  There are " + str(arcpy.GetCount_management(Point_Events)) + " points in the in-memory data..."
+
+        if arcpy.Exists(sdeDDev + "/PROJ_StatusPoints"):
+            arcpy.Delete_management(sdeDDev + "/PROJ_StatusPoints")
+
+        #Copy in-memory point feature layer to GDB
+        print "dynSegStatusUpdates:  Copying in-memory point feature layer to GDB..."
+        arcpy.FeatureClassToFeatureClass_conversion(Point_Events, sdeDDev, "PROJ_StatusPoints", "", "ProjectName \"Project Name\" true true true 100 Text 0 0 ,First,#,RAIL_ADMIN Events,ProjectName,-1,-1;Status \"Status Update\" true true false 255 Text 0 0 ,First,#,RAIL_ADMIN Events,Status,-1,-1;Action \"Action Items\" true true false 255 Text 0 0 ,First,#,RAIL_ADMIN Events,Action,-1,-1;LatestConstEst \"Latest Construction Estimate w/ E&C\" true true false 8 Double 8 38 ,First,#,RAIL_ADMIN Events,LatestConstEst,-1,-1;EnvAllClear \"Environmental All Clear\" true true false 255 Text 0 0 ,First,#,RAIL_ADMIN Events,EnvAllClear,-1,-1;UtilClear \"Utilities Clearance\" true true false 255 Text 0 0 ,First,#,RAIL_ADMIN Events,UtilClear,-1,-1;ROWClear \"ROW Clearance\" true true false 255 Text 0 0 ,First,#,RAIL_ADMIN Events,ROWClear,-1,-1;RRClear \"Railroad Clearance\" true true false 255 Text 0 0 ,First,#,RAIL_ADMIN Events,RRClear,-1,-1;AdvertiseTarget \"Project Advertisement Target\" true true false 255 Text 0 0 ,First,#,RAIL_ADMIN Events,AdvertiseTarget,-1,-1;ProjectManager \"Updating Project Manager (Your Name)\" true true false 255 Text 0 0 ,First,#,RAIL_ADMIN Events,ProjectManager,-1,-1;created_user \"created_user\" true true false 255 Text 0 0 ,First,#,RAIL_ADMIN Events,created_user,-1,-1;created_date \"created_date\" true true false 36 Date 0 0 ,First,#,RAIL_ADMIN Events,created_date,-1,-1;last_edited_user \"last_edited_user\" true true false 255 Text 0 0 ,First,#,RAIL_ADMIN Events,last_edited_user,-1,-1;last_edited_date \"last_edited_date\" true true false 36 Date 0 0 ,First,#,RAIL_ADMIN Events,last_edited_date,-1,-1;VRLID \"VRLID\" true true false 255 Text 0 0 ,First,#,RAIL_ADMIN Events,VRLID,-1,-1;FromMP \"FromMP\" true true false 8 Double 8 38 ,First,#,RAIL_ADMIN Events,FromMP,-1,-1;ToMP \"ToMP\" true true false 8 Double 8 38 ,First,#,RAIL_ADMIN Events,ToMP,-1,-1", "")
+
+        #Make Table View of project status master for line dyn seg
+        print "dynSegStatusUpdates:  Creating project status table views for creating line events..."
+        arcpy.MakeTableView_management(DDEV_PROJ_Status_Updates_Table, DDEV_PROJ_Projects_Status_Updates_View4, "ToMP IS NOT NULL")
+
+        print "dynSegAddProjects:  There are " + str(arcpy.GetCount_management(DDEV_PROJ_Projects_Status_Updates_View4)) + " records in the table view for lines..."
+
+        #Make Route Event Line Layer project status table view
+        print "dynSegStatusUpdates:  Creating line events..."
+        Line_Events = "lyrLines"
+        arcpy.MakeRouteEventLayer_lr(Rail_LRS, "VRLID", DDEV_PROJ_Projects_Status_Updates_View4, "VRLID LINE FromMP ToMP", Line_Events)
+
+        print "dynSegAddProjects:  There are " + str(arcpy.GetCount_management(Line_Events)) + " lines in the in-memory data..."
+
+        if arcpy.Exists(sdeDDev + "/PROJ_StatusLines"):
+            arcpy.Delete_management(sdeDDev + "/PROJ_StatusLines")            
+
+        #Copy in-memory line feature layer to GDB
+        print "dynSegStatusUpdates:  Copying in-memory line feature layer to GDB..."
+        arcpy.FeatureClassToFeatureClass_conversion(Line_Events, sdeDDev, "PROJ_StatusLines", "", "ProjectName \"Project Name\" true true true 100 Text 0 0 ,First,#,RAIL_ADMIN Events,ProjectName,-1,-1;Status \"Status Update\" true true false 255 Text 0 0 ,First,#,RAIL_ADMIN Events,Status,-1,-1;Action \"Action Items\" true true false 255 Text 0 0 ,First,#,RAIL_ADMIN Events,Action,-1,-1;LatestConstEst \"Latest Construction Estimate w/ E&C\" true true false 8 Double 8 38 ,First,#,RAIL_ADMIN Events,LatestConstEst,-1,-1;EnvAllClear \"Environmental All Clear\" true true false 255 Text 0 0 ,First,#,RAIL_ADMIN Events,EnvAllClear,-1,-1;UtilClear \"Utilities Clearance\" true true false 255 Text 0 0 ,First,#,RAIL_ADMIN Events,UtilClear,-1,-1;ROWClear \"ROW Clearance\" true true false 255 Text 0 0 ,First,#,RAIL_ADMIN Events,ROWClear,-1,-1;RRClear \"Railroad Clearance\" true true false 255 Text 0 0 ,First,#,RAIL_ADMIN Events,RRClear,-1,-1;AdvertiseTarget \"Project Advertisement Target\" true true false 255 Text 0 0 ,First,#,RAIL_ADMIN Events,AdvertiseTarget,-1,-1;ProjectManager \"Updating Project Manager (Your Name)\" true true false 255 Text 0 0 ,First,#,RAIL_ADMIN Events,ProjectManager,-1,-1;created_user \"created_user\" true true false 255 Text 0 0 ,First,#,RAIL_ADMIN Events,created_user,-1,-1;created_date \"created_date\" true true false 36 Date 0 0 ,First,#,RAIL_ADMIN Events,created_date,-1,-1;last_edited_user \"last_edited_user\" true true false 255 Text 0 0 ,First,#,RAIL_ADMIN Events,last_edited_user,-1,-1;last_edited_date \"last_edited_date\" true true false 36 Date 0 0 ,First,#,RAIL_ADMIN Events,last_edited_date,-1,-1;VRLID \"VRLID\" true true false 255 Text 0 0 ,First,#,RAIL_ADMIN Events,VRLID,-1,-1;FromMP \"FromMP\" true true false 8 Double 8 38 ,First,#,RAIL_ADMIN Events,FromMP,-1,-1;ToMP \"ToMP\" true true false 8 Double 8 38 ,First,#,RAIL_ADMIN Events,ToMP,-1,-1", "")
+
+    except Exception, msg:
+        exc_type, exc_obj, exc_tb = sys.exc_info()
+        fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]      
+        print(fname, exc_tb.tb_lineno, msg)
+
+def projStatusRelates():
+    try:
+        global DDEV_Project_Points_FC        
+        global DDEV_Project_Lines_FC
+        global DDEV_PROJ_Status_Updates_Table
+        global DDEV_PROJ_Points_PROJ_StatusUpdates_REL
+        global DDEV_PROJ_Lines_PROJ_StatusUpdates_REL
+
+        # Process: Point-Status relationship
+        arcpy.CreateRelationshipClass_management(DDEV_Project_Points_FC, DDEV_PROJ_Status_Updates_Table, DDEV_PROJ_Points_PROJ_StatusUpdates_REL, "SIMPLE", DDEV_PROJ_Status_Updates_Table, DDEV_Project_Points_FC, "NONE", "ONE_TO_MANY", "NONE", "ProjectName", "ProjectName", "", "")
+        # Process: Line-Status relationship
+        arcpy.CreateRelationshipClass_management(DDEV_Project_Lines_FC, DDEV_PROJ_Status_Updates_Table, DDEV_PROJ_Lines_PROJ_StatusUpdates_REL, "SIMPLE", DDEV_PROJ_Status_Updates_Table, DDEV_Project_Lines_FC, "NONE", "ONE_TO_MANY", "NONE", "ProjectName", "ProjectName", "", "")
+
+    except Exception, msg:
+        exc_type, exc_obj, exc_tb = sys.exc_info()
+        fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]      
+        print(fname, exc_tb.tb_lineno, msg)
+
 
 
 def disconnectDomains(obj):
@@ -707,7 +523,9 @@ def main():
 
         CalcVRLIDs()
         dynSegAddProjects()
-        statusUpdateAppend()
+        #statusUpdatesAppend()
+        dynSegStatusUpdates()
+        projStatusRelates()
         #updateDomains()
         
 #Calculating processing time, completing process
